@@ -25,6 +25,7 @@ namespace PlasticShop
         public CustomerDetails(CUSTOMER customer)
         {
             InitializeComponent();
+            orders = new ObservableCollection<INFOORDERCUSTOMER>();
             using (var context = new Entities())
             {
                 c = context.CUSTOMERS.Find(customer.CUSTOMER_ID);
@@ -46,6 +47,7 @@ namespace PlasticShop
                         orders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = item.ORDER_DATE, ORDER_ID = item.ORDER_ID });
                     }
                 }
+                ordersList.ItemsSource = orders;
             }
         }
         private void EditClick(object sender, RoutedEventArgs e)

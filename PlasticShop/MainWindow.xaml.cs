@@ -28,6 +28,10 @@ namespace PlasticShop
         ObservableCollection<COLOUR> colours;
         ObservableCollection<CUSTOMER> customers;
         ObservableCollection<DELIVERER> deliverers;
+        ObservableCollection<INFOORDERCUSTOMER> customerOrders;
+        ObservableCollection<INFOSTOREORDER> storeOrders;
+        ObservableCollection<PRODUCT> products;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +40,9 @@ namespace PlasticShop
             colours = new ObservableCollection<COLOUR>();
             customers = new ObservableCollection<CUSTOMER>();
             deliverers = new ObservableCollection<DELIVERER>();
+            customerOrders = new ObservableCollection<INFOORDERCUSTOMER>();
+            storeOrders = new ObservableCollection<INFOSTOREORDER>();
+            products = new ObservableCollection<PRODUCT>();
             using (var context = new Entities())
             {
                 foreach (var pencil in context.PENCILS)
@@ -63,12 +70,19 @@ namespace PlasticShop
                     var delivererItem = context.DELIVERERS.Find(deliverer.DELIVERER_ID);
                     deliverers.Add(new DELIVERER() { DELIVERER_NAME = delivererItem.DELIVERER_NAME, DELIVERER_ID = delivererItem.DELIVERER_ID });
                 }
+                foreach(var customerOrder in context.INFOORDERCUSTOMERs)
+                {
+                    var customerOrderItem = context.INFOORDERCUSTOMERs.Find(customerOrder.ORDER_ID);
+                    customerOrders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = customerOrderItem.ORDER_DATE, ORDER_ID = customerOrderItem.ORDER_ID });
+                    storeOrders.Add(new INFOSTOREORDER() { ORDER_DATE = customerOrderItem.ORDER_DATE, ORDER_ID = customerOrderItem.ORDER_ID });
+                }
             }
             pencilsList.ItemsSource = pencils;
             canvasesList.ItemsSource = canvases;
             coloursList.ItemsSource = colours;
             customersList.ItemsSource = customers;
             deliverersList.ItemsSource = deliverers;
+            ordersList.ItemsSource = customerOrders;
         }
 
         private void DoubleClick(object sender, MouseButtonEventArgs e)
@@ -77,6 +91,13 @@ namespace PlasticShop
             {
                 PencilDetails pencilDetails = new PencilDetails((PRODUCT)pencilsList.SelectedItem);
                 pencilDetails.Show();
+            }
+        }
+        private void DoubleClickOrder(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
+            {
+
             }
         }
 
@@ -204,6 +225,26 @@ namespace PlasticShop
                 }
             }
             deliverers.Remove((DELIVERER)deliverersList.SelectedItem);
+        }
+
+        private void DeleteOrderClick(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Entities())
+            {
+                foreach (INFOORDERCUSTOMER order in customerOrders)
+                {
+                    if (order == (INFOORDERCUSTOMER)ordersList.SelectedItem)
+                    {
+                        var o = context.INFOSTOREORDERs.Find(order.ORDER_ID);
+                        context.INFOORDERCUSTOMERs.Attach(order);
+                        context.INFOORDERCUSTOMERs.Remove(order);
+                        context.INFOSTOREORDERs.Attach(o);
+                        context.INFOSTOREORDERs.Remove(o);
+                    }
+                }
+                context.SaveChanges();
+            }
+            customerOrders.Remove((INFOORDERCUSTOMER)ordersList.SelectedItem);
         }
 
         private void AddCanvasClick(object sender, RoutedEventArgs e)
@@ -639,6 +680,67 @@ namespace PlasticShop
                 var item = context.DELIVERERS.Find(deliverer.DELIVERER_ID);
                 deliverers.Add(new DELIVERER() { DELIVERER_NAME = item.DELIVERER_NAME, DELIVERER_ID = item.DELIVERER_ID });
                 context.SaveChanges();
+            }
+        }
+        private void AddOrderClick(object sender, RoutedEventArgs e)
+        {
+            var customerOrder = new INFOORDERCUSTOMER();
+            var storeOrder = new INFOSTOREORDER();
+            var cOrder = new CUSTOMERORDER();
+            var sOrder = new STOREORDER();
+            using (var context = new Entities())
+            {
+                if (context.INFOORDERCUSTOMERs.Any())
+                {
+                    decimal id = context.INFOORDERCUSTOMERs.Max(p => p.ORDER_ID);
+                    customerOrder.ORDER_ID = id + 1;
+                    storeOrder.ORDER_ID = id + 1;
+                    cOrder.ORDER_ID = id + 1;
+                    sOrder.ORDER_ID = id + 1;
+                }
+            }
+            customerOrder.ORDER_DATE = (System.DateTime)orderDate.SelectedDate;
+            storeOrder.ORDER_DATE = (System.DateTime)orderDate.SelectedDate;
+            customerOrder.SHIPPING_DATE = (System.DateTime)orderShippingDate.SelectedDate;
+            storeOrder.DELIVERY_DATE = (System.DateTime)deliverDate.SelectedDate;
+            customerOrder.CUSTOMER_ID = ((CUSTOMER)customersOrder.SelectedItem).CUSTOMER_ID;
+            storeOrder.DELIVERER_ID = ((DELIVERER)deliverersOrder.SelectedItem).DELIVERER_ID;
+            try
+            {
+                customerOrder.SUMMARY_DISCOUNT = decimal.Parse(summaryDiscount.Text);
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("Invalid data", "Summary Discount");
+            }
+            using (var context = new Entities())
+            {
+                context.INFOORDERCUSTOMERs.Add(customerOrder);
+                context.INFOSTOREORDERs.Add(storeOrder);
+                var item = context.INFOORDERCUSTOMERs.Find(customerOrder.ORDER_ID);
+                customerOrders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = item.ORDER_DATE, ORDER_ID = item.ORDER_ID });
+                context.SaveChanges();
+            }
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(OrdersTab.IsSelected)
+            {
+                customersOrder.ItemsSource = customers;
+                deliverersOrder.ItemsSource = deliverers;
+                using(var context = new Entities())
+                {
+                    foreach(var item in context.PRODUCTS)
+                    {
+                        products.Add(new PRODUCT() { PRODUCT_ID = item.PRODUCT_ID, PRODUCT_NAME = item.PRODUCT_NAME });
+                    }
+                }
+                productsOrder.ItemsSource = products;
+            }
+            if(!OrdersTab.IsSelected)
+            {
+                products.Clear();
             }
         }
     }

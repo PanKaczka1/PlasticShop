@@ -25,6 +25,7 @@ namespace PlasticShop
         public DelivererDetails(DELIVERER deliverer)
         {
             InitializeComponent();
+            orders = new ObservableCollection<INFOSTOREORDER>();
             using (var context = new Entities())
             {
                 c = context.DELIVERERS.Find(deliverer.DELIVERER_ID);
@@ -44,6 +45,7 @@ namespace PlasticShop
                         orders.Add(new INFOSTOREORDER() { ORDER_DATE = item.ORDER_DATE, ORDER_ID = item.ORDER_ID });
                     }
                 }
+                ordersList.ItemsSource = orders;
             }
         }
         private void EditClick(object sender, RoutedEventArgs e)

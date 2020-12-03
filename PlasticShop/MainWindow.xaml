@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="774">
+        <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged"  HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="774">
             <TabItem Header="Products">
                 <Grid Margin="0,0,0,0">
                     <TabControl x:Name="tabControl1" Margin="10,10,9.8,10">
@@ -150,6 +150,36 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Name="delivererBlock" MouseLeftButtonDown="DoubleClickDeliverer" Text="{Binding DELIVERER_NAME}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Orders" Name="OrdersTab">
+                <Grid>
+                    <Button x:Name="deleteOrder" Content="Delete" Click="DeleteOrderClick" HorizontalAlignment="Left" Margin="418,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="addOrder" Click="AddOrderClick" Content="Add" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label x:Name="labelOrderDate" Content="Order Date" Margin="10,10,613.2,289"/>
+                    <DatePicker Name="orderDate" Width="100" Margin="10,35,658.8,307"/>
+                    <Label x:Name="labelOrderShippingDate" Content="Shipping Date" Margin="10,63,613.2,236"/>
+                    <DatePicker Name="orderShippingDate" Width="100" Margin="10,83,658.8,259"/>
+                    <Label x:Name="labelSummaryDiscount" Content="Summary Discount" Margin="10,116,613.2,183"/>
+                    <TextBox x:Name="summaryDiscount" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDeliverDate" Content="Deliver Date" Margin="10,169,612.8,130"/>
+                    <DatePicker Name="deliverDate" Width="100" Margin="10,189,658.8,153"/>
+                    <Label x:Name="labelCustomerOrder" Content="Customer" Margin="135,10,487.8,288.8"/>
+                    <ComboBox x:Name="customersOrder" ItemsSource="{Binding Path=customers}" DisplayMemberPath="NAME" HorizontalAlignment="Left" Margin="135,35,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererOrder" Content="Deliverer" Margin="260,10,362.8,288.8"/>
+                    <ComboBox x:Name="deliverersOrder" ItemsSource="{Binding Path=deliverers}" DisplayMemberPath="DELIVERER_NAME" HorizontalAlignment="Left" Margin="260,35,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelProductsOrder" Content="Deliverer" Margin="260,10,362.8,288.8"/>
+                    <ComboBox x:Name="productsOrder" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelProductsAmount" Content="Products Amount" Margin="255,118,367.8,214"/>
+                    <TextBox x:Name="productsAmount" Height="24" TextWrapping="Wrap" Margin="260,142,455.8,206"/>
+                    <ListBox Name="ordersList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Name="orderBlock" MouseLeftButtonDown="DoubleClickOrder" Text="{Binding ORDER_DATE}">
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
