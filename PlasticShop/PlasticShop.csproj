@@ -85,11 +85,17 @@
     <Compile Include="COLOUR.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ColourDetails.xaml.cs">
+      <DependentUpon>ColourDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CRAYON.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDetails.xaml.cs">
+      <DependentUpon>CustomerDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="CUSTOMERORDER.cs">
       <DependentUpon>Entities.tt</DependentUpon>
@@ -151,6 +157,14 @@
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Page Include="CanvasDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColourDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

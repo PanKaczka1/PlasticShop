@@ -70,8 +70,61 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Deliverers">
-                <Grid></Grid>
+            <TabItem Header="Colours">
+                <Grid>
+                    <Button x:Name="deleteColour" Content="Delete" Click="DeleteColourClick" HorizontalAlignment="Left" Margin="418,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="addColour" Click="AddColourClick" Content="Add" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label x:Name="labelColourName" Content="Colour Name" Margin="10,10,612.8,314"/>
+                    <TextBox x:Name="colourName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelredValue" Content="Red Value" Margin="10,63,612.8,261"/>
+                    <TextBox x:Name="redValue" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelGreenValue" Content="Green Value" Margin="10,116,612.8,203"/>
+                    <TextBox x:Name="greenValue" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelBlueValue" Content="Blue Value" Margin="10,169,613.2,130"/>
+                    <TextBox x:Name="blueValue" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <ListBox Name="coloursList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Name="colourBlock" MouseLeftButtonDown="DoubleClickColour" Text="{Binding COLOUR_NAME}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Customers">
+                <Grid>
+                    <Button x:Name="deleteCustomer" Content="Delete" Click="DeleteCustomerClick" HorizontalAlignment="Left" Margin="418,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="addCustomer" Click="AddCustomerClick" Content="Add" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label x:Name="labelCustomerName" Content="Name" Margin="10,10,613.2,289"/>
+                    <TextBox x:Name="customerName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerBankAccount" Content="Bank Account" Margin="10,63,613.2,236"/>
+                    <TextBox x:Name="customerBankAccount" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerEmail" Content="Email" Margin="10,116,613.2,183"/>
+                    <TextBox x:Name="customerEmail" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerPhoneNumber" Content="Phone Number" Margin="10,169,613.2,130"/>
+                    <TextBox x:Name="customerPhoneNumber" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerPostCode" Content="Post Code" Margin="10,223,613.2,76"/>
+                    <TextBox x:Name="customerPostCode" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerCity" Content="City" Margin="135,10,488.2,289"/>
+                    <TextBox x:Name="customerCity" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerStreetName" Content="Street Name" Margin="135,63,488.2,236"/>
+                    <TextBox x:Name="customerStreetName" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerHouseNumber" Content="House Number" Margin="135,116,487.8,183"/>
+                    <TextBox x:Name="customerHouseNumber" HorizontalAlignment="Left" Height="23" Margin="135,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelCustomerLocalNumber" Content="Local Number" Margin="135,169,487.8,130"/>
+                    <TextBox x:Name="customerLocalNumber" HorizontalAlignment="Left" Height="24" Margin="135,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelcustomerDiscountPoints" Content="Discount Points" Margin="135,223,487.8,76"/>
+                    <TextBox x:Name="customerDiscountPoints" HorizontalAlignment="Left" Height="23" Margin="135,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <ListBox Name="customersList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Name="customerBlock" MouseLeftButtonDown="DoubleClickCustomer" Text="{Binding NAME}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
