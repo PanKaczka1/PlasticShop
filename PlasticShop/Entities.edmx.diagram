@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ee16fcda44e4b2096fd2e301938f646" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.C__EFMigrationsHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.BRUSH" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CANVAS" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.COLOUR" Width="1.5" PointX="3.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CRAYON" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CUSTOMER" Width="1.5" PointX="1.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DELIVERER" Width="1.5" PointX="1.5" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFOORDERCUSTOMER" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFOSTOREORDER" Width="1.5" PointX="3.75" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INK" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MARKER" Width="1.5" PointX="6" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.NOTEBOOK" Width="1.5" PointX="3" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PAINT" Width="1.5" PointX="6" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PAPERPAD" Width="1.5" PointX="3" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PENCIL" Width="1.5" PointX="3" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PEN" Width="1.5" PointX="6" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PRODUCT" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SCULPTINGMATERIAL" Width="1.5" PointX="9" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SET" Width="1.5" PointX="3" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CUSTOMERORDER" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DISCOUNTPOINT" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.STOREORDER" Width="1.5" PointX="6" PointY="26.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_BRUSHES_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CANVASES_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_COLOUR_CRAYONS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_COLOUR_INKS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_COLOUR_MARKERS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_COLOUR_PAINTS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_COLOUR_PENS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_COLOUR_SCULPTINGMATERIALS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CRAYONS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CUSTOMER_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DELIVERER_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CUSTOMER_ORDERS_ORDER" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_STORE_ORDERS_ORDER" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_INKS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MARKERS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_NOTEBOOKS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PAINTS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PAPERPADS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PENCILS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PENS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CUSTOMER_ORDERS_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SCULPTINGMATERIALS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SETS_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_STORE_ORDERS_PRODUCT" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

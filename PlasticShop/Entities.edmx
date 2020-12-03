@@ -1,0 +1,1559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar2" MaxLength="150" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar2" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BRUSHES">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="SHAPE" Type="varchar2" MaxLength="20" />
+          <Property Name="TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CANVASES">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="CANVASE_SIZE" Type="varchar2" MaxLength="5" />
+          <Property Name="MATERIAL" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COLOURS">
+          <Key>
+            <PropertyRef Name="COLOUR_ID" />
+          </Key>
+          <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="RED_VALUE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="GREEN_VALUE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BLUE_VALUE" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CRAYONS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="CRAYON_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="SHAPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SBD_ST_PS5_1.CUSTOMERORDERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CUSTOMERORDERS">
+          <Key>
+            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+          </Key>
+          <Property Name="NUMBER_OF_PRODUCTS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="CUSTOMERS">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="BANK_ACCOUNT" Type="varchar2" MaxLength="26" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="varchar2" MaxLength="9" Nullable="false" />
+          <Property Name="POST_CODE" Type="varchar2" MaxLength="6" Nullable="false" />
+          <Property Name="CITY" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="STREET_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="HOUSE_NUMBER" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="LOCAL_NUMBER" Type="varchar2" MaxLength="100" />
+          <Property Name="DISCOUNT_POINTS" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DELIVERERS">
+          <Key>
+            <PropertyRef Name="DELIVERER_ID" />
+          </Key>
+          <Property Name="DELIVERER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DELIVERER_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="BANK_ACCOUNT" Type="varchar2" MaxLength="26" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="varchar2" MaxLength="9" Nullable="false" />
+          <Property Name="POST_CODE" Type="varchar2" MaxLength="6" Nullable="false" />
+          <Property Name="CITY" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="STREET_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="HOUSE_NUMBER" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SBD_ST_PS5_1.DISCOUNTPOINTS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DISCOUNTPOINTS">
+          <Key>
+            <PropertyRef Name="DISCOUNT" />
+            <PropertyRef Name="POINTS_MINIMUM" />
+            <PropertyRef Name="POINTS_MAXIMUM" />
+          </Key>
+          <Property Name="DISCOUNT" Type="number" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="POINTS_MINIMUM" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="POINTS_MAXIMUM" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INFOORDERCUSTOMER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_DATE" Type="date" Nullable="false" />
+          <Property Name="SHIPPING_DATE" Type="date" />
+          <Property Name="SUMMARY_DISCOUNT" Type="number" Precision="10" Scale="2" />
+          <Property Name="CUSTOMER_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="INFOSTOREORDER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_DATE" Type="date" Nullable="false" />
+          <Property Name="DELIVERY_DATE" Type="date" />
+          <Property Name="DELIVERER_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="INKS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="INT_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="MARKERS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="MARKER_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="NOTEBOOKS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PAPER_TYPE" Type="varchar2" MaxLength="5" />
+          <Property Name="NOTEBOOK_SIZE" Type="varchar2" MaxLength="5" />
+          <Property Name="NOTEBOOK_PAGES" Type="number" Precision="38" Scale="0" />
+          <Property Name="GRAMMAGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="HARDCOVER" Type="char" MaxLength="1" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAINTS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PANIT_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="PAPERPADS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PAGES_NUMBER" Type="number" Precision="38" Scale="0" />
+          <Property Name="PAPER_PAD_SIZE" Type="varchar2" MaxLength="5" />
+          <Property Name="GRAMMAGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PENCILS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="GRAPHITE_GRADE" Type="varchar2" MaxLength="4" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PENS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PEN_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="PRODUCTS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PRODUCTS_IN_STOCK" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DISCOUNT" Type="number" Precision="10" Scale="2" />
+          <Property Name="PRODUCER" Type="varchar2" MaxLength="50" />
+          <Property Name="PRICE" Type="number" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCULPTINGMATERIALS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="SM_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="SETS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="1000" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SBD_ST_PS5_1.STOREORDERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="STOREORDERS">
+          <Key>
+            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+          </Key>
+          <Property Name="NUMBER_OF_PRODUCTS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <Association Name="FK_BRUSHES_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="BRUSHES" Type="Self.BRUSHES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="BRUSHES">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANVASES_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="CANVASES" Type="Self.CANVASES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CANVASES">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_CRAYONS">
+          <End Role="COLOURS" Type="Self.COLOURS" Multiplicity="0..1" />
+          <End Role="CRAYONS" Type="Self.CRAYONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="CRAYONS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_INKS">
+          <End Role="COLOURS" Type="Self.COLOURS" Multiplicity="0..1" />
+          <End Role="INKS" Type="Self.INKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="INKS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_MARKERS">
+          <End Role="COLOURS" Type="Self.COLOURS" Multiplicity="0..1" />
+          <End Role="MARKERS" Type="Self.MARKERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="MARKERS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_PAINTS">
+          <End Role="COLOURS" Type="Self.COLOURS" Multiplicity="0..1" />
+          <End Role="PAINTS" Type="Self.PAINTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="PAINTS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_PENS">
+          <End Role="COLOURS" Type="Self.COLOURS" Multiplicity="0..1" />
+          <End Role="PENS" Type="Self.PENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="PENS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_SCULPTINGMATERIALS">
+          <End Role="COLOURS" Type="Self.COLOURS" Multiplicity="0..1" />
+          <End Role="SCULPTINGMATERIALS" Type="Self.SCULPTINGMATERIALS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="SCULPTINGMATERIALS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRAYONS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="CRAYONS" Type="Self.CRAYONS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CRAYONS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_ID">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMERS" Multiplicity="0..1" />
+          <End Role="INFOORDERCUSTOMER" Type="Self.INFOORDERCUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="INFOORDERCUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_ORDERS_ORDER">
+          <End Role="INFOORDERCUSTOMER" Type="Self.INFOORDERCUSTOMER" Multiplicity="0..1" />
+          <End Role="CUSTOMERORDERS" Type="Self.CUSTOMERORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFOORDERCUSTOMER">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="CUSTOMERORDERS">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_ORDERS_PRODUCT">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="0..1" />
+          <End Role="CUSTOMERORDERS" Type="Self.CUSTOMERORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CUSTOMERORDERS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DELIVERER_ID">
+          <End Role="DELIVERERS" Type="Self.DELIVERERS" Multiplicity="0..1" />
+          <End Role="INFOSTOREORDER" Type="Self.INFOSTOREORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DELIVERERS">
+              <PropertyRef Name="DELIVERER_ID" />
+            </Principal>
+            <Dependent Role="INFOSTOREORDER">
+              <PropertyRef Name="DELIVERER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INKS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="INKS" Type="Self.INKS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="INKS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARKERS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="MARKERS" Type="Self.MARKERS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="MARKERS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOTEBOOKS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="NOTEBOOKS" Type="Self.NOTEBOOKS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="NOTEBOOKS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAINTS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="PAINTS" Type="Self.PAINTS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PAINTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAPERPADS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="PAPERPADS" Type="Self.PAPERPADS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PAPERPADS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PENCILS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="PENCILS" Type="Self.PENCILS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PENCILS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PENS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="PENS" Type="Self.PENS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PENS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCULPTINGMATERIALS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="SCULPTINGMATERIALS" Type="Self.SCULPTINGMATERIALS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="SCULPTINGMATERIALS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="SETS" Type="Self.SETS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="SETS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORE_ORDERS_ORDER">
+          <End Role="INFOSTOREORDER" Type="Self.INFOSTOREORDER" Multiplicity="0..1" />
+          <End Role="STOREORDERS" Type="Self.STOREORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFOSTOREORDER">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="STOREORDERS">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORE_ORDERS_PRODUCT">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="0..1" />
+          <End Role="STOREORDERS" Type="Self.STOREORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="STOREORDERS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="BRUSHES" EntityType="Self.BRUSHES" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="CANVASES" EntityType="Self.CANVASES" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="COLOURS" EntityType="Self.COLOURS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="CRAYONS" EntityType="Self.CRAYONS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="DELIVERERS" EntityType="Self.DELIVERERS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="INFOORDERCUSTOMER" EntityType="Self.INFOORDERCUSTOMER" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="INFOSTOREORDER" EntityType="Self.INFOSTOREORDER" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="INKS" EntityType="Self.INKS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="MARKERS" EntityType="Self.MARKERS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="NOTEBOOKS" EntityType="Self.NOTEBOOKS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="PAINTS" EntityType="Self.PAINTS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="PAPERPADS" EntityType="Self.PAPERPADS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="PENCILS" EntityType="Self.PENCILS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="PENS" EntityType="Self.PENS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="SCULPTINGMATERIALS" EntityType="Self.SCULPTINGMATERIALS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="SETS" EntityType="Self.SETS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="CUSTOMERORDERS" EntityType="Self.CUSTOMERORDERS" store:Type="Tables" store:Schema="SBD_ST_PS5_1">
+            <DefiningQuery>SELECT 
+"CUSTOMERORDERS"."NUMBER_OF_PRODUCTS" AS "NUMBER_OF_PRODUCTS", 
+"CUSTOMERORDERS"."ORDER_ID" AS "ORDER_ID", 
+"CUSTOMERORDERS"."PRODUCT_ID" AS "PRODUCT_ID"
+FROM "SBD_ST_PS5_1"."CUSTOMERORDERS" "CUSTOMERORDERS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DISCOUNTPOINTS" EntityType="Self.DISCOUNTPOINTS" store:Type="Tables" store:Schema="SBD_ST_PS5_1">
+            <DefiningQuery>SELECT 
+"DISCOUNTPOINTS"."DISCOUNT" AS "DISCOUNT", 
+"DISCOUNTPOINTS"."POINTS_MINIMUM" AS "POINTS_MINIMUM", 
+"DISCOUNTPOINTS"."POINTS_MAXIMUM" AS "POINTS_MAXIMUM"
+FROM "SBD_ST_PS5_1"."DISCOUNTPOINTS" "DISCOUNTPOINTS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="STOREORDERS" EntityType="Self.STOREORDERS" store:Type="Tables" store:Schema="SBD_ST_PS5_1">
+            <DefiningQuery>SELECT 
+"STOREORDERS"."NUMBER_OF_PRODUCTS" AS "NUMBER_OF_PRODUCTS", 
+"STOREORDERS"."ORDER_ID" AS "ORDER_ID", 
+"STOREORDERS"."PRODUCT_ID" AS "PRODUCT_ID"
+FROM "SBD_ST_PS5_1"."STOREORDERS" "STOREORDERS"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BRUSHES_ID" Association="Self.FK_BRUSHES_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="BRUSHES" EntitySet="BRUSHES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANVASES_ID" Association="Self.FK_CANVASES_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="CANVASES" EntitySet="CANVASES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_CRAYONS" Association="Self.FK_COLOUR_CRAYONS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="CRAYONS" EntitySet="CRAYONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_INKS" Association="Self.FK_COLOUR_INKS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="INKS" EntitySet="INKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_MARKERS" Association="Self.FK_COLOUR_MARKERS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="MARKERS" EntitySet="MARKERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_PAINTS" Association="Self.FK_COLOUR_PAINTS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="PAINTS" EntitySet="PAINTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_PENS" Association="Self.FK_COLOUR_PENS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="PENS" EntitySet="PENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_SCULPTINGMATERIALS" Association="Self.FK_COLOUR_SCULPTINGMATERIALS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="SCULPTINGMATERIALS" EntitySet="SCULPTINGMATERIALS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRAYONS_ID" Association="Self.FK_CRAYONS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="CRAYONS" EntitySet="CRAYONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_ID" Association="Self.FK_CUSTOMER_ID">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="INFOORDERCUSTOMER" EntitySet="INFOORDERCUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_ORDERS_ORDER" Association="Self.FK_CUSTOMER_ORDERS_ORDER">
+            <End Role="INFOORDERCUSTOMER" EntitySet="INFOORDERCUSTOMER" />
+            <End Role="CUSTOMERORDERS" EntitySet="CUSTOMERORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_ORDERS_PRODUCT" Association="Self.FK_CUSTOMER_ORDERS_PRODUCT">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="CUSTOMERORDERS" EntitySet="CUSTOMERORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DELIVERER_ID" Association="Self.FK_DELIVERER_ID">
+            <End Role="DELIVERERS" EntitySet="DELIVERERS" />
+            <End Role="INFOSTOREORDER" EntitySet="INFOSTOREORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INKS_ID" Association="Self.FK_INKS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="INKS" EntitySet="INKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARKERS_ID" Association="Self.FK_MARKERS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="MARKERS" EntitySet="MARKERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTEBOOKS_ID" Association="Self.FK_NOTEBOOKS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="NOTEBOOKS" EntitySet="NOTEBOOKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAINTS_ID" Association="Self.FK_PAINTS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PAINTS" EntitySet="PAINTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAPERPADS_ID" Association="Self.FK_PAPERPADS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PAPERPADS" EntitySet="PAPERPADS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PENCILS_ID" Association="Self.FK_PENCILS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PENCILS" EntitySet="PENCILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PENS_ID" Association="Self.FK_PENS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PENS" EntitySet="PENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCULPTINGMATERIALS_ID" Association="Self.FK_SCULPTINGMATERIALS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="SCULPTINGMATERIALS" EntitySet="SCULPTINGMATERIALS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETS_ID" Association="Self.FK_SETS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="SETS" EntitySet="SETS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORE_ORDERS_ORDER" Association="Self.FK_STORE_ORDERS_ORDER">
+            <End Role="INFOSTOREORDER" EntitySet="INFOSTOREORDER" />
+            <End Role="STOREORDERS" EntitySet="STOREORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORE_ORDERS_PRODUCT" Association="Self.FK_STORE_ORDERS_PRODUCT">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="STOREORDERS" EntitySet="STOREORDERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BRUSH">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="SHAPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_BRUSHES_ID" FromRole="BRUSHES" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="CANVAS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="CANVASE_SIZE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="MATERIAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_CANVASES_ID" FromRole="CANVASES" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="COLOUR">
+          <Key>
+            <PropertyRef Name="COLOUR_ID" />
+          </Key>
+          <Property Name="COLOUR_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RED_VALUE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="GREEN_VALUE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BLUE_VALUE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CRAYONS" Relationship="Self.FK_COLOUR_CRAYONS" FromRole="COLOURS" ToRole="CRAYONS" />
+          <NavigationProperty Name="INKS" Relationship="Self.FK_COLOUR_INKS" FromRole="COLOURS" ToRole="INKS" />
+          <NavigationProperty Name="MARKERS" Relationship="Self.FK_COLOUR_MARKERS" FromRole="COLOURS" ToRole="MARKERS" />
+          <NavigationProperty Name="PAINTS" Relationship="Self.FK_COLOUR_PAINTS" FromRole="COLOURS" ToRole="PAINTS" />
+          <NavigationProperty Name="PENS" Relationship="Self.FK_COLOUR_PENS" FromRole="COLOURS" ToRole="PENS" />
+          <NavigationProperty Name="SCULPTINGMATERIALS" Relationship="Self.FK_COLOUR_SCULPTINGMATERIALS" FromRole="COLOURS" ToRole="SCULPTINGMATERIALS" />
+        </EntityType>
+        <EntityType Name="CRAYON">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="CRAYON_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SHAPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="COLOUR" Relationship="Self.FK_COLOUR_CRAYONS" FromRole="CRAYONS" ToRole="COLOURS" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_CRAYONS_ID" FromRole="CRAYONS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUSTOMER_ID" />
+          </Key>
+          <Property Name="CUSTOMER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BANK_ACCOUNT" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="POST_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CITY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STREET_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HOUSE_NUMBER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LOCAL_NUMBER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DISCOUNT_POINTS" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="INFOORDERCUSTOMERs" Relationship="Self.FK_CUSTOMER_ID" FromRole="CUSTOMERS" ToRole="INFOORDERCUSTOMER" />
+        </EntityType>
+        <EntityType Name="DELIVERER">
+          <Key>
+            <PropertyRef Name="DELIVERER_ID" />
+          </Key>
+          <Property Name="DELIVERER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DELIVERER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BANK_ACCOUNT" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="POST_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CITY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STREET_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HOUSE_NUMBER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="INFOSTOREORDERs" Relationship="Self.FK_DELIVERER_ID" FromRole="DELIVERERS" ToRole="INFOSTOREORDER" />
+        </EntityType>
+        <EntityType Name="INFOORDERCUSTOMER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="SHIPPING_DATE" Type="DateTime" />
+          <Property Name="SUMMARY_DISCOUNT" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CUSTOMER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_CUSTOMER_ID" FromRole="INFOORDERCUSTOMER" ToRole="CUSTOMERS" />
+          <NavigationProperty Name="CUSTOMERORDERS" Relationship="Self.FK_CUSTOMER_ORDERS_ORDER" FromRole="INFOORDERCUSTOMER" ToRole="CUSTOMERORDERS" />
+        </EntityType>
+        <EntityType Name="INFOSTOREORDER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="DELIVERY_DATE" Type="DateTime" />
+          <Property Name="DELIVERER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="DELIVERER" Relationship="Self.FK_DELIVERER_ID" FromRole="INFOSTOREORDER" ToRole="DELIVERERS" />
+          <NavigationProperty Name="STOREORDERS" Relationship="Self.FK_STORE_ORDERS_ORDER" FromRole="INFOSTOREORDER" ToRole="STOREORDERS" />
+        </EntityType>
+        <EntityType Name="INK">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="INT_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="COLOUR" Relationship="Self.FK_COLOUR_INKS" FromRole="INKS" ToRole="COLOURS" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_INKS_ID" FromRole="INKS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="MARKER">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="MARKER_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="COLOUR" Relationship="Self.FK_COLOUR_MARKERS" FromRole="MARKERS" ToRole="COLOURS" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_MARKERS_ID" FromRole="MARKERS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="NOTEBOOK">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PAPER_TYPE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NOTEBOOK_SIZE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NOTEBOOK_PAGES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="GRAMMAGE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="HARDCOVER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_NOTEBOOKS_ID" FromRole="NOTEBOOKS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="PAINT">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PANIT_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="COLOUR" Relationship="Self.FK_COLOUR_PAINTS" FromRole="PAINTS" ToRole="COLOURS" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PAINTS_ID" FromRole="PAINTS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="PAPERPAD">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PAGES_NUMBER" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PAPER_PAD_SIZE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GRAMMAGE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PAPERPADS_ID" FromRole="PAPERPADS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="PENCIL">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="GRAPHITE_GRADE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PENCILS_ID" FromRole="PENCILS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="PEN">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PEN_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="COLOUR" Relationship="Self.FK_COLOUR_PENS" FromRole="PENS" ToRole="COLOURS" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PENS_ID" FromRole="PENS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCTS_IN_STOCK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DISCOUNT" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PRODUCER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRICE" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="BRUSH" Relationship="Self.FK_BRUSHES_ID" FromRole="PRODUCTS" ToRole="BRUSHES" />
+          <NavigationProperty Name="CANVAS" Relationship="Self.FK_CANVASES_ID" FromRole="PRODUCTS" ToRole="CANVASES" />
+          <NavigationProperty Name="CRAYON" Relationship="Self.FK_CRAYONS_ID" FromRole="PRODUCTS" ToRole="CRAYONS" />
+          <NavigationProperty Name="INK" Relationship="Self.FK_INKS_ID" FromRole="PRODUCTS" ToRole="INKS" />
+          <NavigationProperty Name="MARKER" Relationship="Self.FK_MARKERS_ID" FromRole="PRODUCTS" ToRole="MARKERS" />
+          <NavigationProperty Name="NOTEBOOK" Relationship="Self.FK_NOTEBOOKS_ID" FromRole="PRODUCTS" ToRole="NOTEBOOKS" />
+          <NavigationProperty Name="PAINT" Relationship="Self.FK_PAINTS_ID" FromRole="PRODUCTS" ToRole="PAINTS" />
+          <NavigationProperty Name="PAPERPAD" Relationship="Self.FK_PAPERPADS_ID" FromRole="PRODUCTS" ToRole="PAPERPADS" />
+          <NavigationProperty Name="PENCIL" Relationship="Self.FK_PENCILS_ID" FromRole="PRODUCTS" ToRole="PENCILS" />
+          <NavigationProperty Name="PEN" Relationship="Self.FK_PENS_ID" FromRole="PRODUCTS" ToRole="PENS" />
+          <NavigationProperty Name="CUSTOMERORDERS" Relationship="Self.FK_CUSTOMER_ORDERS_PRODUCT" FromRole="PRODUCTS" ToRole="CUSTOMERORDERS" />
+          <NavigationProperty Name="SCULPTINGMATERIAL" Relationship="Self.FK_SCULPTINGMATERIALS_ID" FromRole="PRODUCTS" ToRole="SCULPTINGMATERIALS" />
+          <NavigationProperty Name="SET" Relationship="Self.FK_SETS_ID" FromRole="PRODUCTS" ToRole="SETS" />
+          <NavigationProperty Name="STOREORDERS" Relationship="Self.FK_STORE_ORDERS_PRODUCT" FromRole="PRODUCTS" ToRole="STOREORDERS" />
+        </EntityType>
+        <EntityType Name="SCULPTINGMATERIAL">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="SM_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COLOUR_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="COLOUR" Relationship="Self.FK_COLOUR_SCULPTINGMATERIALS" FromRole="SCULPTINGMATERIALS" ToRole="COLOURS" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_SCULPTINGMATERIALS_ID" FromRole="SCULPTINGMATERIALS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="SET">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_SETS_ID" FromRole="SETS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="CUSTOMERORDER">
+          <Key>
+            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+          </Key>
+          <Property Name="NUMBER_OF_PRODUCTS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="INFOORDERCUSTOMER" Relationship="Self.FK_CUSTOMER_ORDERS_ORDER" FromRole="CUSTOMERORDERS" ToRole="INFOORDERCUSTOMER" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_CUSTOMER_ORDERS_PRODUCT" FromRole="CUSTOMERORDERS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="DISCOUNTPOINT">
+          <Key>
+            <PropertyRef Name="DISCOUNT" />
+            <PropertyRef Name="POINTS_MINIMUM" />
+            <PropertyRef Name="POINTS_MAXIMUM" />
+          </Key>
+          <Property Name="DISCOUNT" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="POINTS_MINIMUM" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="POINTS_MAXIMUM" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STOREORDER">
+          <Key>
+            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+          </Key>
+          <Property Name="NUMBER_OF_PRODUCTS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ORDER_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="INFOSTOREORDER" Relationship="Self.FK_STORE_ORDERS_ORDER" FromRole="STOREORDERS" ToRole="INFOSTOREORDER" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_STORE_ORDERS_PRODUCT" FromRole="STOREORDERS" ToRole="PRODUCTS" />
+        </EntityType>
+        <Association Name="FK_BRUSHES_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="BRUSHES" Type="Self.BRUSH" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="BRUSHES">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANVASES_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="CANVASES" Type="Self.CANVAS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CANVASES">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_CRAYONS">
+          <End Role="COLOURS" Type="Self.COLOUR" Multiplicity="0..1" />
+          <End Role="CRAYONS" Type="Self.CRAYON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="CRAYONS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_INKS">
+          <End Role="COLOURS" Type="Self.COLOUR" Multiplicity="0..1" />
+          <End Role="INKS" Type="Self.INK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="INKS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_MARKERS">
+          <End Role="COLOURS" Type="Self.COLOUR" Multiplicity="0..1" />
+          <End Role="MARKERS" Type="Self.MARKER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="MARKERS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_PAINTS">
+          <End Role="COLOURS" Type="Self.COLOUR" Multiplicity="0..1" />
+          <End Role="PAINTS" Type="Self.PAINT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="PAINTS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_PENS">
+          <End Role="COLOURS" Type="Self.COLOUR" Multiplicity="0..1" />
+          <End Role="PENS" Type="Self.PEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="PENS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COLOUR_SCULPTINGMATERIALS">
+          <End Role="COLOURS" Type="Self.COLOUR" Multiplicity="0..1" />
+          <End Role="SCULPTINGMATERIALS" Type="Self.SCULPTINGMATERIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLOURS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Principal>
+            <Dependent Role="SCULPTINGMATERIALS">
+              <PropertyRef Name="COLOUR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRAYONS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="CRAYONS" Type="Self.CRAYON" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CRAYONS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_ID">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMER" Multiplicity="0..1" />
+          <End Role="INFOORDERCUSTOMER" Type="Self.INFOORDERCUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Principal>
+            <Dependent Role="INFOORDERCUSTOMER">
+              <PropertyRef Name="CUSTOMER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DELIVERER_ID">
+          <End Role="DELIVERERS" Type="Self.DELIVERER" Multiplicity="0..1" />
+          <End Role="INFOSTOREORDER" Type="Self.INFOSTOREORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DELIVERERS">
+              <PropertyRef Name="DELIVERER_ID" />
+            </Principal>
+            <Dependent Role="INFOSTOREORDER">
+              <PropertyRef Name="DELIVERER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_ORDERS_ORDER">
+          <End Role="INFOORDERCUSTOMER" Type="Self.INFOORDERCUSTOMER" Multiplicity="0..1" />
+          <End Role="CUSTOMERORDERS" Type="Self.CUSTOMERORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFOORDERCUSTOMER">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="CUSTOMERORDERS">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORE_ORDERS_ORDER">
+          <End Role="INFOSTOREORDER" Type="Self.INFOSTOREORDER" Multiplicity="0..1" />
+          <End Role="STOREORDERS" Type="Self.STOREORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFOSTOREORDER">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="STOREORDERS">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INKS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="INKS" Type="Self.INK" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="INKS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARKERS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="MARKERS" Type="Self.MARKER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="MARKERS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOTEBOOKS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="NOTEBOOKS" Type="Self.NOTEBOOK" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="NOTEBOOKS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAINTS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PAINTS" Type="Self.PAINT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PAINTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAPERPADS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PAPERPADS" Type="Self.PAPERPAD" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PAPERPADS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PENCILS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PENCILS" Type="Self.PENCIL" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PENCILS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PENS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PENS" Type="Self.PEN" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PENS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_ORDERS_PRODUCT">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="CUSTOMERORDERS" Type="Self.CUSTOMERORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="CUSTOMERORDERS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SCULPTINGMATERIALS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="SCULPTINGMATERIALS" Type="Self.SCULPTINGMATERIAL" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="SCULPTINGMATERIALS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETS_ID">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="SETS" Type="Self.SET" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="SETS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STORE_ORDERS_PRODUCT">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="STOREORDERS" Type="Self.STOREORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="STOREORDERS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+          <EntitySet Name="BRUSHES" EntityType="Self.BRUSH" />
+          <EntitySet Name="CANVASES" EntityType="Self.CANVAS" />
+          <EntitySet Name="COLOURS" EntityType="Self.COLOUR" />
+          <EntitySet Name="CRAYONS" EntityType="Self.CRAYON" />
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="DELIVERERS" EntityType="Self.DELIVERER" />
+          <EntitySet Name="INFOORDERCUSTOMERs" EntityType="Self.INFOORDERCUSTOMER" />
+          <EntitySet Name="INFOSTOREORDERs" EntityType="Self.INFOSTOREORDER" />
+          <EntitySet Name="INKS" EntityType="Self.INK" />
+          <EntitySet Name="MARKERS" EntityType="Self.MARKER" />
+          <EntitySet Name="NOTEBOOKS" EntityType="Self.NOTEBOOK" />
+          <EntitySet Name="PAINTS" EntityType="Self.PAINT" />
+          <EntitySet Name="PAPERPADS" EntityType="Self.PAPERPAD" />
+          <EntitySet Name="PENCILS" EntityType="Self.PENCIL" />
+          <EntitySet Name="PENS" EntityType="Self.PEN" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
+          <EntitySet Name="SCULPTINGMATERIALS" EntityType="Self.SCULPTINGMATERIAL" />
+          <EntitySet Name="SETS" EntityType="Self.SET" />
+          <EntitySet Name="CUSTOMERORDERS" EntityType="Self.CUSTOMERORDER" />
+          <EntitySet Name="DISCOUNTPOINTS" EntityType="Self.DISCOUNTPOINT" />
+          <EntitySet Name="STOREORDERS" EntityType="Self.STOREORDER" />
+          <AssociationSet Name="FK_BRUSHES_ID" Association="Self.FK_BRUSHES_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="BRUSHES" EntitySet="BRUSHES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANVASES_ID" Association="Self.FK_CANVASES_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="CANVASES" EntitySet="CANVASES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_CRAYONS" Association="Self.FK_COLOUR_CRAYONS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="CRAYONS" EntitySet="CRAYONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_INKS" Association="Self.FK_COLOUR_INKS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="INKS" EntitySet="INKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_MARKERS" Association="Self.FK_COLOUR_MARKERS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="MARKERS" EntitySet="MARKERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_PAINTS" Association="Self.FK_COLOUR_PAINTS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="PAINTS" EntitySet="PAINTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_PENS" Association="Self.FK_COLOUR_PENS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="PENS" EntitySet="PENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COLOUR_SCULPTINGMATERIALS" Association="Self.FK_COLOUR_SCULPTINGMATERIALS">
+            <End Role="COLOURS" EntitySet="COLOURS" />
+            <End Role="SCULPTINGMATERIALS" EntitySet="SCULPTINGMATERIALS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRAYONS_ID" Association="Self.FK_CRAYONS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="CRAYONS" EntitySet="CRAYONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_ID" Association="Self.FK_CUSTOMER_ID">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="INFOORDERCUSTOMER" EntitySet="INFOORDERCUSTOMERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DELIVERER_ID" Association="Self.FK_DELIVERER_ID">
+            <End Role="DELIVERERS" EntitySet="DELIVERERS" />
+            <End Role="INFOSTOREORDER" EntitySet="INFOSTOREORDERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_ORDERS_ORDER" Association="Self.FK_CUSTOMER_ORDERS_ORDER">
+            <End Role="INFOORDERCUSTOMER" EntitySet="INFOORDERCUSTOMERs" />
+            <End Role="CUSTOMERORDERS" EntitySet="CUSTOMERORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORE_ORDERS_ORDER" Association="Self.FK_STORE_ORDERS_ORDER">
+            <End Role="INFOSTOREORDER" EntitySet="INFOSTOREORDERs" />
+            <End Role="STOREORDERS" EntitySet="STOREORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INKS_ID" Association="Self.FK_INKS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="INKS" EntitySet="INKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARKERS_ID" Association="Self.FK_MARKERS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="MARKERS" EntitySet="MARKERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTEBOOKS_ID" Association="Self.FK_NOTEBOOKS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="NOTEBOOKS" EntitySet="NOTEBOOKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAINTS_ID" Association="Self.FK_PAINTS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PAINTS" EntitySet="PAINTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAPERPADS_ID" Association="Self.FK_PAPERPADS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PAPERPADS" EntitySet="PAPERPADS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PENCILS_ID" Association="Self.FK_PENCILS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PENCILS" EntitySet="PENCILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PENS_ID" Association="Self.FK_PENS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PENS" EntitySet="PENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_ORDERS_PRODUCT" Association="Self.FK_CUSTOMER_ORDERS_PRODUCT">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="CUSTOMERORDERS" EntitySet="CUSTOMERORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SCULPTINGMATERIALS_ID" Association="Self.FK_SCULPTINGMATERIALS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="SCULPTINGMATERIALS" EntitySet="SCULPTINGMATERIALS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETS_ID" Association="Self.FK_SETS_ID">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="SETS" EntitySet="SETS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STORE_ORDERS_PRODUCT" Association="Self.FK_STORE_ORDERS_PRODUCT">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="STOREORDERS" EntitySet="STOREORDERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="C__EFMigrationsHistory">
+            <EntityTypeMapping TypeName="Model.C__EFMigrationsHistory">
+              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BRUSHES">
+            <EntityTypeMapping TypeName="Model.BRUSH">
+              <MappingFragment StoreEntitySet="BRUSHES">
+                <ScalarProperty Name="SHAPE" ColumnName="SHAPE" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CANVASES">
+            <EntityTypeMapping TypeName="Model.CANVAS">
+              <MappingFragment StoreEntitySet="CANVASES">
+                <ScalarProperty Name="CANVASE_SIZE" ColumnName="CANVASE_SIZE" />
+                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COLOURS">
+            <EntityTypeMapping TypeName="Model.COLOUR">
+              <MappingFragment StoreEntitySet="COLOURS">
+                <ScalarProperty Name="COLOUR_ID" ColumnName="COLOUR_ID" />
+                <ScalarProperty Name="COLOUR_NAME" ColumnName="COLOUR_NAME" />
+                <ScalarProperty Name="RED_VALUE" ColumnName="RED_VALUE" />
+                <ScalarProperty Name="GREEN_VALUE" ColumnName="GREEN_VALUE" />
+                <ScalarProperty Name="BLUE_VALUE" ColumnName="BLUE_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRAYONS">
+            <EntityTypeMapping TypeName="Model.CRAYON">
+              <MappingFragment StoreEntitySet="CRAYONS">
+                <ScalarProperty Name="CRAYON_TYPE" ColumnName="CRAYON_TYPE" />
+                <ScalarProperty Name="SHAPE" ColumnName="SHAPE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="COLOUR_ID" ColumnName="COLOUR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERS">
+            <EntityTypeMapping TypeName="Model.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMERS">
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="BANK_ACCOUNT" ColumnName="BANK_ACCOUNT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="POST_CODE" ColumnName="POST_CODE" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="STREET_NAME" ColumnName="STREET_NAME" />
+                <ScalarProperty Name="HOUSE_NUMBER" ColumnName="HOUSE_NUMBER" />
+                <ScalarProperty Name="LOCAL_NUMBER" ColumnName="LOCAL_NUMBER" />
+                <ScalarProperty Name="DISCOUNT_POINTS" ColumnName="DISCOUNT_POINTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DELIVERERS">
+            <EntityTypeMapping TypeName="Model.DELIVERER">
+              <MappingFragment StoreEntitySet="DELIVERERS">
+                <ScalarProperty Name="DELIVERER_ID" ColumnName="DELIVERER_ID" />
+                <ScalarProperty Name="DELIVERER_NAME" ColumnName="DELIVERER_NAME" />
+                <ScalarProperty Name="BANK_ACCOUNT" ColumnName="BANK_ACCOUNT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="POST_CODE" ColumnName="POST_CODE" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="STREET_NAME" ColumnName="STREET_NAME" />
+                <ScalarProperty Name="HOUSE_NUMBER" ColumnName="HOUSE_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFOORDERCUSTOMERs">
+            <EntityTypeMapping TypeName="Model.INFOORDERCUSTOMER">
+              <MappingFragment StoreEntitySet="INFOORDERCUSTOMER">
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+                <ScalarProperty Name="SHIPPING_DATE" ColumnName="SHIPPING_DATE" />
+                <ScalarProperty Name="SUMMARY_DISCOUNT" ColumnName="SUMMARY_DISCOUNT" />
+                <ScalarProperty Name="CUSTOMER_ID" ColumnName="CUSTOMER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFOSTOREORDERs">
+            <EntityTypeMapping TypeName="Model.INFOSTOREORDER">
+              <MappingFragment StoreEntitySet="INFOSTOREORDER">
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+                <ScalarProperty Name="DELIVERY_DATE" ColumnName="DELIVERY_DATE" />
+                <ScalarProperty Name="DELIVERER_ID" ColumnName="DELIVERER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INKS">
+            <EntityTypeMapping TypeName="Model.INK">
+              <MappingFragment StoreEntitySet="INKS">
+                <ScalarProperty Name="INT_TYPE" ColumnName="INT_TYPE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="COLOUR_ID" ColumnName="COLOUR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARKERS">
+            <EntityTypeMapping TypeName="Model.MARKER">
+              <MappingFragment StoreEntitySet="MARKERS">
+                <ScalarProperty Name="MARKER_TYPE" ColumnName="MARKER_TYPE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="COLOUR_ID" ColumnName="COLOUR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTEBOOKS">
+            <EntityTypeMapping TypeName="Model.NOTEBOOK">
+              <MappingFragment StoreEntitySet="NOTEBOOKS">
+                <ScalarProperty Name="PAPER_TYPE" ColumnName="PAPER_TYPE" />
+                <ScalarProperty Name="NOTEBOOK_SIZE" ColumnName="NOTEBOOK_SIZE" />
+                <ScalarProperty Name="NOTEBOOK_PAGES" ColumnName="NOTEBOOK_PAGES" />
+                <ScalarProperty Name="GRAMMAGE" ColumnName="GRAMMAGE" />
+                <ScalarProperty Name="HARDCOVER" ColumnName="HARDCOVER" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAINTS">
+            <EntityTypeMapping TypeName="Model.PAINT">
+              <MappingFragment StoreEntitySet="PAINTS">
+                <ScalarProperty Name="PANIT_TYPE" ColumnName="PANIT_TYPE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="COLOUR_ID" ColumnName="COLOUR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAPERPADS">
+            <EntityTypeMapping TypeName="Model.PAPERPAD">
+              <MappingFragment StoreEntitySet="PAPERPADS">
+                <ScalarProperty Name="PAGES_NUMBER" ColumnName="PAGES_NUMBER" />
+                <ScalarProperty Name="PAPER_PAD_SIZE" ColumnName="PAPER_PAD_SIZE" />
+                <ScalarProperty Name="GRAMMAGE" ColumnName="GRAMMAGE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PENCILS">
+            <EntityTypeMapping TypeName="Model.PENCIL">
+              <MappingFragment StoreEntitySet="PENCILS">
+                <ScalarProperty Name="GRAPHITE_GRADE" ColumnName="GRAPHITE_GRADE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PENS">
+            <EntityTypeMapping TypeName="Model.PEN">
+              <MappingFragment StoreEntitySet="PENS">
+                <ScalarProperty Name="PEN_TYPE" ColumnName="PEN_TYPE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="COLOUR_ID" ColumnName="COLOUR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTS">
+            <EntityTypeMapping TypeName="Model.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+                <ScalarProperty Name="PRODUCTS_IN_STOCK" ColumnName="PRODUCTS_IN_STOCK" />
+                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+                <ScalarProperty Name="PRODUCER" ColumnName="PRODUCER" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCULPTINGMATERIALS">
+            <EntityTypeMapping TypeName="Model.SCULPTINGMATERIAL">
+              <MappingFragment StoreEntitySet="SCULPTINGMATERIALS">
+                <ScalarProperty Name="SM_TYPE" ColumnName="SM_TYPE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="COLOUR_ID" ColumnName="COLOUR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SETS">
+            <EntityTypeMapping TypeName="Model.SET">
+              <MappingFragment StoreEntitySet="SETS">
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERORDERS">
+            <EntityTypeMapping TypeName="Model.CUSTOMERORDER">
+              <MappingFragment StoreEntitySet="CUSTOMERORDERS">
+                <ScalarProperty Name="NUMBER_OF_PRODUCTS" ColumnName="NUMBER_OF_PRODUCTS" />
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISCOUNTPOINTS">
+            <EntityTypeMapping TypeName="Model.DISCOUNTPOINT">
+              <MappingFragment StoreEntitySet="DISCOUNTPOINTS">
+                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+                <ScalarProperty Name="POINTS_MINIMUM" ColumnName="POINTS_MINIMUM" />
+                <ScalarProperty Name="POINTS_MAXIMUM" ColumnName="POINTS_MAXIMUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STOREORDERS">
+            <EntityTypeMapping TypeName="Model.STOREORDER">
+              <MappingFragment StoreEntitySet="STOREORDERS">
+                <ScalarProperty Name="NUMBER_OF_PRODUCTS" ColumnName="NUMBER_OF_PRODUCTS" />
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
