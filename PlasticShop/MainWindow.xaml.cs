@@ -27,6 +27,7 @@ namespace PlasticShop
         ObservableCollection<PRODUCT> canvases;
         ObservableCollection<COLOUR> colours;
         ObservableCollection<CUSTOMER> customers;
+        ObservableCollection<DELIVERER> deliverers;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +35,7 @@ namespace PlasticShop
             canvases = new ObservableCollection<PRODUCT>();
             colours = new ObservableCollection<COLOUR>();
             customers = new ObservableCollection<CUSTOMER>();
+            deliverers = new ObservableCollection<DELIVERER>();
             using (var context = new Entities())
             {
                 foreach (var pencil in context.PENCILS)
@@ -56,11 +58,17 @@ namespace PlasticShop
                     var customerItem = context.CUSTOMERS.Find(customer.CUSTOMER_ID);
                     customers.Add(new CUSTOMER() { NAME = customerItem.NAME, CUSTOMER_ID = customerItem.CUSTOMER_ID });
                 }
+                foreach(var deliverer in context.DELIVERERS)
+                {
+                    var delivererItem = context.DELIVERERS.Find(deliverer.DELIVERER_ID);
+                    deliverers.Add(new DELIVERER() { DELIVERER_NAME = delivererItem.DELIVERER_NAME, DELIVERER_ID = delivererItem.DELIVERER_ID });
+                }
             }
             pencilsList.ItemsSource = pencils;
             canvasesList.ItemsSource = canvases;
             coloursList.ItemsSource = colours;
             customersList.ItemsSource = customers;
+            deliverersList.ItemsSource = deliverers;
         }
 
         private void DoubleClick(object sender, MouseButtonEventArgs e)
@@ -94,6 +102,15 @@ namespace PlasticShop
             {
                 CustomerDetails customerDetails = new CustomerDetails((CUSTOMER)customersList.SelectedItem);
                 customerDetails.Show();
+            }
+        }
+
+        private void DoubleClickDeliverer(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
+            {
+                DelivererDetails delivererDetails = new DelivererDetails((DELIVERER)deliverersList.SelectedItem);
+                delivererDetails.Show();
             }
         }
 
@@ -170,6 +187,23 @@ namespace PlasticShop
                 }
             }
             customers.Remove((CUSTOMER)customersList.SelectedItem);
+        }
+
+        private void DeleteDelivererClick(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Entities())
+            {
+                foreach (DELIVERER deliverer in deliverers)
+                {
+                    if (deliverer == (DELIVERER)deliverersList.SelectedItem)
+                    {
+                        context.DELIVERERS.Attach(deliverer);
+                        context.DELIVERERS.Remove(deliverer);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            deliverers.Remove((DELIVERER)deliverersList.SelectedItem);
         }
 
         private void AddCanvasClick(object sender, RoutedEventArgs e)
@@ -406,9 +440,9 @@ namespace PlasticShop
             var customer = new CUSTOMER();
             using (var context = new Entities())
             {
-                if (context.PRODUCTS.Any())
+                if (context.CUSTOMERS.Any())
                 {
-                    decimal id = context.PRODUCTS.Max(p => p.PRODUCT_ID);
+                    decimal id = context.CUSTOMERS.Max(p => p.CUSTOMER_ID);
                     customer.CUSTOMER_ID = id + 1;
                 }
 
@@ -509,6 +543,101 @@ namespace PlasticShop
                 context.CUSTOMERS.Add(customer);
                 var item = context.CUSTOMERS.Find(customer.CUSTOMER_ID);
                 customers.Add(new CUSTOMER() { NAME = item.NAME, CUSTOMER_ID = item.CUSTOMER_ID });
+                context.SaveChanges();
+            }
+        }
+
+        private void AddDelivererClick(object sender, RoutedEventArgs e)
+        {
+
+            var deliverer = new DELIVERER();
+            using (var context = new Entities())
+            {
+                if (context.DELIVERERS.Any())
+                {
+                    decimal id = context.DELIVERERS.Max(p => p.DELIVERER_ID);
+                    deliverer.DELIVERER_ID = id + 1;
+                }
+
+            }
+            try
+            {
+                deliverer.DELIVERER_NAME = delivererName.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "Name");
+                return;
+            }
+            try
+            {
+                deliverer.BANK_ACCOUNT = delivererBankAccount.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "Bank Account");
+                return;
+            }
+            try
+            {
+                deliverer.EMAIL = delivererEmail.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "Email");
+                return;
+            }
+            try
+            {
+                deliverer.PHONE_NUMBER = delivererPhoneNumber.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "Phone Number");
+                return;
+            }
+            try
+            {
+                deliverer.POST_CODE = delivererPostCode.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "Post Code");
+                return;
+            }
+            try
+            {
+                deliverer.CITY = delivererCity.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "City");
+                return;
+            }
+            try
+            {
+                deliverer.STREET_NAME = delivererStreetName.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "Street Name");
+                return;
+            }
+            try
+            {
+                deliverer.HOUSE_NUMBER = delivererHouseNumber.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "House Number");
+                return;
+            }
+
+            using (var context = new Entities())
+            {
+                context.DELIVERERS.Add(deliverer);
+                var item = context.DELIVERERS.Find(deliverer.DELIVERER_ID);
+                deliverers.Add(new DELIVERER() { DELIVERER_NAME = item.DELIVERER_NAME, DELIVERER_ID = item.DELIVERER_ID });
                 context.SaveChanges();
             }
         }

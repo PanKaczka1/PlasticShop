@@ -106,6 +106,9 @@
     <Compile Include="DELIVERER.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DelivererDetails.xaml.cs">
+      <DependentUpon>DelivererDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DISCOUNTPOINT.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomerDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DelivererDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -126,6 +126,36 @@
                     </ListBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="Deliverers">
+                <Grid>
+                    <Button x:Name="deleteDeliverer" Content="Delete" Click="DeleteDelivererClick" HorizontalAlignment="Left" Margin="418,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="addDeliverer" Click="AddDelivererClick" Content="Add" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label x:Name="labelDelivererName" Content="Name" Margin="10,10,613.2,289"/>
+                    <TextBox x:Name="delivererName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererBankAccount" Content="Bank Account" Margin="10,63,613.2,236"/>
+                    <TextBox x:Name="delivererBankAccount" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererEmail" Content="Email" Margin="10,116,613.2,183"/>
+                    <TextBox x:Name="delivererEmail" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererPhoneNumber" Content="Phone Number" Margin="10,169,613.2,130"/>
+                    <TextBox x:Name="delivererPhoneNumber" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererPostCode" Content="Post Code" Margin="10,223,613.2,76"/>
+                    <TextBox x:Name="delivererPostCode" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererCity" Content="City" Margin="135,10,488.2,289"/>
+                    <TextBox x:Name="delivererCity" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererStreetName" Content="Street Name" Margin="135,63,488.2,236"/>
+                    <TextBox x:Name="delivererStreetName" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelDelivererHouseNumber" Content="House Number" Margin="135,116,487.8,183"/>
+                    <TextBox x:Name="delivererHouseNumber" HorizontalAlignment="Left" Height="23" Margin="135,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <ListBox Name="deliverersList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Name="delivererBlock" MouseLeftButtonDown="DoubleClickDeliverer" Text="{Binding DELIVERER_NAME}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
