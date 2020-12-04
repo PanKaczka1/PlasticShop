@@ -711,8 +711,6 @@ namespace PlasticShop
                     }
                 }
             }
-            customerOrder.ORDER_DATE = System.DateTime.Now;
-            customerOrder.SHIPPING_DATE = (System.DateTime)orderShippingDate.SelectedDate;
             customerOrder.CUSTOMER_ID = ((CUSTOMER)customersOrder.SelectedItem).CUSTOMER_ID;
             try
             {
@@ -762,6 +760,41 @@ namespace PlasticShop
                 customerOrderProducts.Add(new CUSTOMERORDER() { NUMBER_OF_PRODUCTS = decimal.Parse(productsAmount.Text), PRODUCT_ID = ((PRODUCT)productsOrder.SelectedItem).PRODUCT_ID });
                 MessageBox.Show("Product " + ((PRODUCT)productsOrder.SelectedItem).PRODUCT_NAME + " was added to order");
             }
+        }
+
+        private void deleteCrayon_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addCrayon_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteDeliver_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addDeliver_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addProductDeliver_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteDiscountPoint_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addDiscountPoint_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

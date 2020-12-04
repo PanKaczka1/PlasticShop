@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CrayonDetails" Height="450" Width="800">
     <Grid>
-        <Button x:Name="edit" Click="EditClick" Content="Edit" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="edit" Click="edit_Click"  Content="Edit" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="labelCrayonName" Content="Product Name" Margin="10,10,613.2,289"/>
         <TextBox x:Name="CrayonName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="labelCrayonsInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
