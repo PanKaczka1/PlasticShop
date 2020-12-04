@@ -357,7 +357,7 @@ namespace PlasticShop
                 MessageBox.Show("Invalid data", "Name");
                 return;
             }
-            try
+            /*try
             {
                 colour.RED_VALUE = int.Parse(redValue.Text);
             }
@@ -383,7 +383,7 @@ namespace PlasticShop
             {
                 MessageBox.Show("Invalid data", "Blue Value");
                 return;
-            }
+            }*/
 
             using (var context = new Entities())
             {
