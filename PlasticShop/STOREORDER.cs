@@ -17,6 +17,7 @@ namespace PlasticShop
         public decimal NUMBER_OF_PRODUCTS { get; set; }
         public Nullable<decimal> ORDER_ID { get; set; }
         public Nullable<decimal> PRODUCT_ID { get; set; }
+        public decimal STOREORDERS_ID { get; set; }
     
         public virtual INFOSTOREORDER INFOSTOREORDER { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }

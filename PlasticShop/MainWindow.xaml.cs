@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +33,7 @@ namespace PlasticShop
         ObservableCollection<INFOORDERCUSTOMER> customerOrders;
         ObservableCollection<INFOSTOREORDER> storeOrders;
         ObservableCollection<PRODUCT> products;
+        ObservableCollection<CUSTOMERORDER> customerOrderProducts;
 
         public MainWindow()
         {
@@ -43,6 +46,7 @@ namespace PlasticShop
             customerOrders = new ObservableCollection<INFOORDERCUSTOMER>();
             storeOrders = new ObservableCollection<INFOSTOREORDER>();
             products = new ObservableCollection<PRODUCT>();
+            customerOrderProducts = new ObservableCollection<CUSTOMERORDER>();
             using (var context = new Entities())
             {
                 foreach (var pencil in context.PENCILS)
@@ -70,11 +74,10 @@ namespace PlasticShop
                     var delivererItem = context.DELIVERERS.Find(deliverer.DELIVERER_ID);
                     deliverers.Add(new DELIVERER() { DELIVERER_NAME = delivererItem.DELIVERER_NAME, DELIVERER_ID = delivererItem.DELIVERER_ID });
                 }
-                foreach(var customerOrder in context.INFOORDERCUSTOMERs)
+                foreach (var customerOrder in context.INFOORDERCUSTOMERs)
                 {
                     var customerOrderItem = context.INFOORDERCUSTOMERs.Find(customerOrder.ORDER_ID);
                     customerOrders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = customerOrderItem.ORDER_DATE, ORDER_ID = customerOrderItem.ORDER_ID });
-                    storeOrders.Add(new INFOSTOREORDER() { ORDER_DATE = customerOrderItem.ORDER_DATE, ORDER_ID = customerOrderItem.ORDER_ID });
                 }
             }
             pencilsList.ItemsSource = pencils;
@@ -235,11 +238,8 @@ namespace PlasticShop
                 {
                     if (order == (INFOORDERCUSTOMER)ordersList.SelectedItem)
                     {
-                        var o = context.INFOSTOREORDERs.Find(order.ORDER_ID);
                         context.INFOORDERCUSTOMERs.Attach(order);
                         context.INFOORDERCUSTOMERs.Remove(order);
-                        context.INFOSTOREORDERs.Attach(o);
-                        context.INFOSTOREORDERs.Remove(o);
                     }
                 }
                 context.SaveChanges();
@@ -685,26 +685,35 @@ namespace PlasticShop
         private void AddOrderClick(object sender, RoutedEventArgs e)
         {
             var customerOrder = new INFOORDERCUSTOMER();
-            var storeOrder = new INFOSTOREORDER();
-            var cOrder = new CUSTOMERORDER();
-            var sOrder = new STOREORDER();
+            var cOrder = new List<CUSTOMERORDER>();
+            decimal id;
+            decimal counter;
             using (var context = new Entities())
             {
                 if (context.INFOORDERCUSTOMERs.Any())
                 {
-                    decimal id = context.INFOORDERCUSTOMERs.Max(p => p.ORDER_ID);
+                    id = context.INFOORDERCUSTOMERs.Max(p => p.ORDER_ID);
                     customerOrder.ORDER_ID = id + 1;
-                    storeOrder.ORDER_ID = id + 1;
-                    cOrder.ORDER_ID = id + 1;
-                    sOrder.ORDER_ID = id + 1;
+                }
+                foreach (var itemProduct in customerOrderProducts)
+                {
+                    counter = 1;
+                    if (context.CUSTOMERORDERS.Any())
+                    {
+                        id = context.CUSTOMERORDERS.Max(p => p.CUSTOMERORDERS_ID);
+                        id = id + counter;
+                        counter++;
+                        cOrder.Add( new CUSTOMERORDER() { PRODUCT_ID = itemProduct.PRODUCT_ID, NUMBER_OF_PRODUCTS = itemProduct.NUMBER_OF_PRODUCTS, ORDER_ID = customerOrder.ORDER_ID, CUSTOMERORDERS_ID = id });
+                    }
+                    else
+                    {
+                        cOrder.Add(new CUSTOMERORDER() { PRODUCT_ID = itemProduct.PRODUCT_ID, NUMBER_OF_PRODUCTS = itemProduct.NUMBER_OF_PRODUCTS, ORDER_ID = customerOrder.ORDER_ID });
+                    }
                 }
             }
-            customerOrder.ORDER_DATE = (System.DateTime)orderDate.SelectedDate;
-            storeOrder.ORDER_DATE = (System.DateTime)orderDate.SelectedDate;
+            customerOrder.ORDER_DATE = System.DateTime.Now;
             customerOrder.SHIPPING_DATE = (System.DateTime)orderShippingDate.SelectedDate;
-            storeOrder.DELIVERY_DATE = (System.DateTime)deliverDate.SelectedDate;
             customerOrder.CUSTOMER_ID = ((CUSTOMER)customersOrder.SelectedItem).CUSTOMER_ID;
-            storeOrder.DELIVERER_ID = ((DELIVERER)deliverersOrder.SelectedItem).DELIVERER_ID;
             try
             {
                 customerOrder.SUMMARY_DISCOUNT = decimal.Parse(summaryDiscount.Text);
@@ -715,8 +724,11 @@ namespace PlasticShop
             }
             using (var context = new Entities())
             {
+                foreach(var itemProduct in cOrder)
+                {
+                    context.CUSTOMERORDERS.Add(itemProduct);
+                }
                 context.INFOORDERCUSTOMERs.Add(customerOrder);
-                context.INFOSTOREORDERs.Add(storeOrder);
                 var item = context.INFOORDERCUSTOMERs.Find(customerOrder.ORDER_ID);
                 customerOrders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = item.ORDER_DATE, ORDER_ID = item.ORDER_ID });
                 context.SaveChanges();
@@ -728,7 +740,6 @@ namespace PlasticShop
             if(OrdersTab.IsSelected)
             {
                 customersOrder.ItemsSource = customers;
-                deliverersOrder.ItemsSource = deliverers;
                 using(var context = new Entities())
                 {
                     foreach(var item in context.PRODUCTS)
@@ -741,6 +752,15 @@ namespace PlasticShop
             if(!OrdersTab.IsSelected)
             {
                 products.Clear();
+            }
+        }
+
+        private void addProductOrder_Click(object sender, RoutedEventArgs e)
+        {
+            using(var context = new Entities())
+            {
+                customerOrderProducts.Add(new CUSTOMERORDER() { NUMBER_OF_PRODUCTS = decimal.Parse(productsAmount.Text), PRODUCT_ID = ((PRODUCT)productsOrder.SelectedItem).PRODUCT_ID });
+                MessageBox.Show("Product " + ((PRODUCT)productsOrder.SelectedItem).PRODUCT_NAME + " was added to order");
             }
         }
     }

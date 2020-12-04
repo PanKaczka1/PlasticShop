@@ -66,6 +66,36 @@
                                 </ListBox>
                             </Grid>
                         </TabItem>
+                        <TabItem Header="Crayons">
+                            <Grid >
+                                <Button x:Name="deleteCrayon" Content="Delete" Click="DeleteCrayonClick" HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addCrayon" Click="AddCrayonClick" Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelCrayonName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="CrayonName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelCrayonsInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="CrayonsInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountCrayon" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountCrayon" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerCrayon" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerCrayon" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPriceCrayon" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="priceCrayon" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelTypeCrayon" Content="Crayon Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="typeCrayon" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelShapeCrayon" Content="Crayon Shape" Margin="135,63,488.2,236"/>
+                                <TextBox x:Name="shapeCrayon" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelColourCrayon" Content="Colour" Margin="135,116,488.2,183"/>
+                                <ComboBox x:Name="colourCrayon" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="crayonsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="crayonBlock" MouseLeftButtonDown="DoubleClick" Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </TabItem>
                     </TabControl>
 
                 </Grid>
@@ -160,26 +190,38 @@
                 <Grid>
                     <Button x:Name="deleteOrder" Content="Delete" Click="DeleteOrderClick" HorizontalAlignment="Left" Margin="418,343,0,0" VerticalAlignment="Top" Width="75"/>
                     <Button x:Name="addOrder" Click="AddOrderClick" Content="Add" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Label x:Name="labelOrderDate" Content="Order Date" Margin="10,10,613.2,289"/>
-                    <DatePicker Name="orderDate" Width="100" Margin="10,35,658.8,307"/>
-                    <Label x:Name="labelOrderShippingDate" Content="Shipping Date" Margin="10,63,613.2,236"/>
-                    <DatePicker Name="orderShippingDate" Width="100" Margin="10,83,658.8,259"/>
-                    <Label x:Name="labelSummaryDiscount" Content="Summary Discount" Margin="10,116,613.2,183"/>
-                    <TextBox x:Name="summaryDiscount" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="labelDeliverDate" Content="Deliver Date" Margin="10,169,612.8,130"/>
-                    <DatePicker Name="deliverDate" Width="100" Margin="10,189,658.8,153"/>
-                    <Label x:Name="labelCustomerOrder" Content="Customer" Margin="135,10,487.8,288.8"/>
-                    <ComboBox x:Name="customersOrder" ItemsSource="{Binding Path=customers}" DisplayMemberPath="NAME" HorizontalAlignment="Left" Margin="135,35,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="labelDelivererOrder" Content="Deliverer" Margin="260,10,362.8,288.8"/>
-                    <ComboBox x:Name="deliverersOrder" ItemsSource="{Binding Path=deliverers}" DisplayMemberPath="DELIVERER_NAME" HorizontalAlignment="Left" Margin="260,35,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="labelProductsOrder" Content="Deliverer" Margin="260,10,362.8,288.8"/>
-                    <ComboBox x:Name="productsOrder" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="labelProductsAmount" Content="Products Amount" Margin="255,118,367.8,214"/>
-                    <TextBox x:Name="productsAmount" Height="24" TextWrapping="Wrap" Margin="260,142,455.8,206"/>
+                    <Label x:Name="labelCustomerOrder" Content="Customer" Margin="10,10,612.8,289"/>
+                    <ComboBox x:Name="customersOrder" ItemsSource="{Binding Path=customers}" DisplayMemberPath="NAME" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelProductsOrder" Content="Products" Margin="135,10,487.8,289"/>
+                    <ComboBox x:Name="productsOrder" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelProductsAmount" Content="Products Amount" Margin="260,10,362.8,322"/>
+                    <TextBox x:Name="productsAmount" Height="24" TextWrapping="Wrap" Margin="260,33,455.8,315"/>
+                    <Button x:Name="addProductOrder" Click="addProductOrder_Click" Content="Add Product" HorizontalAlignment="Left" Margin="318,33,0,0" VerticalAlignment="Top" Width="75"/>
                     <ListBox Name="ordersList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Name="orderBlock" MouseLeftButtonDown="DoubleClickOrder" Text="{Binding ORDER_DATE}">
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Delivers">
+                <Grid>
+                    <Button x:Name="deleteDeliver" Content="Delete" Click="DeleteDeliverClick" HorizontalAlignment="Left" Margin="418,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="addDeliver" Click="AddDeliverClick" Content="Add" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label x:Name="labelDelivererDeliver" Content="Deliverer" Margin="10,10,612.8,289"/>
+                    <ComboBox x:Name="delivererDeliver" ItemsSource="{Binding Path=deliverers}" DisplayMemberPath="DELIVERER_NAME" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelProductsDeliver" Content="Products" Margin="135,10,487.8,289"/>
+                    <ComboBox x:Name="productsDeliver" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="labelProductsAmountDeliver" Content="Products Amount" Margin="260,10,362.8,322"/>
+                    <TextBox x:Name="productsAmountDeliver" Height="24" TextWrapping="Wrap" Margin="260,33,455.8,315"/>
+                    <Button x:Name="addProductDeliver" Click="addProductDeliver_Click" Content="Add Product" HorizontalAlignment="Left" Margin="318,33,0,0" VerticalAlignment="Top" Width="75"/>
+                    <ListBox Name="deliversList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Name="deliverBlock" MouseLeftButtonDown="DoubleClickOrder" Text="{Binding ORDER_DATE}">
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

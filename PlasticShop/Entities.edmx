@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__EFMigrationsHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -47,15 +47,14 @@
           <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="COLOUR_ID" Type="number" Precision="38" Scale="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SBD_ST_PS5_1.CUSTOMERORDERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CUSTOMERORDERS">
           <Key>
-            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+            <PropertyRef Name="CUSTOMERORDERS_ID" />
           </Key>
           <Property Name="NUMBER_OF_PRODUCTS" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ORDER_ID" Type="number" Precision="38" Scale="0" />
           <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="CUSTOMERORDERS_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="CUSTOMERS">
           <Key>
@@ -87,13 +86,9 @@ warning 6002: The table/view 'SBD_ST_PS5_1.CUSTOMERORDERS' does not have a prima
           <Property Name="STREET_NAME" Type="varchar2" MaxLength="100" Nullable="false" />
           <Property Name="HOUSE_NUMBER" Type="varchar2" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SBD_ST_PS5_1.DISCOUNTPOINTS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DISCOUNTPOINTS">
           <Key>
             <PropertyRef Name="DISCOUNT" />
-            <PropertyRef Name="POINTS_MINIMUM" />
-            <PropertyRef Name="POINTS_MAXIMUM" />
           </Key>
           <Property Name="DISCOUNT" Type="number" Precision="10" Scale="2" Nullable="false" />
           <Property Name="POINTS_MINIMUM" Type="number" Precision="38" Scale="0" Nullable="false" />
@@ -204,15 +199,14 @@ warning 6002: The table/view 'SBD_ST_PS5_1.DISCOUNTPOINTS' does not have a prima
           <Property Name="DESCRIPTION" Type="varchar2" MaxLength="1000" />
           <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SBD_ST_PS5_1.STOREORDERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="STOREORDERS">
           <Key>
-            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+            <PropertyRef Name="STOREORDERS_ID" />
           </Key>
           <Property Name="NUMBER_OF_PRODUCTS" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ORDER_ID" Type="number" Precision="38" Scale="0" />
           <Property Name="PRODUCT_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="STOREORDERS_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <Association Name="FK_BRUSHES_ID">
           <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
@@ -508,8 +502,10 @@ warning 6002: The table/view 'SBD_ST_PS5_1.STOREORDERS' does not have a primary 
           <EntitySet Name="CANVASES" EntityType="Self.CANVASES" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="COLOURS" EntityType="Self.COLOURS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="CRAYONS" EntityType="Self.CRAYONS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="CUSTOMERORDERS" EntityType="Self.CUSTOMERORDERS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="DELIVERERS" EntityType="Self.DELIVERERS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
+          <EntitySet Name="DISCOUNTPOINTS" EntityType="Self.DISCOUNTPOINTS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="INFOORDERCUSTOMER" EntityType="Self.INFOORDERCUSTOMER" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="INFOSTOREORDER" EntityType="Self.INFOSTOREORDER" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="INKS" EntityType="Self.INKS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
@@ -522,27 +518,7 @@ warning 6002: The table/view 'SBD_ST_PS5_1.STOREORDERS' does not have a primary 
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="SCULPTINGMATERIALS" EntityType="Self.SCULPTINGMATERIALS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <EntitySet Name="SETS" EntityType="Self.SETS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
-          <EntitySet Name="CUSTOMERORDERS" EntityType="Self.CUSTOMERORDERS" store:Type="Tables" store:Schema="SBD_ST_PS5_1">
-            <DefiningQuery>SELECT 
-"CUSTOMERORDERS"."NUMBER_OF_PRODUCTS" AS "NUMBER_OF_PRODUCTS", 
-"CUSTOMERORDERS"."ORDER_ID" AS "ORDER_ID", 
-"CUSTOMERORDERS"."PRODUCT_ID" AS "PRODUCT_ID"
-FROM "SBD_ST_PS5_1"."CUSTOMERORDERS" "CUSTOMERORDERS"</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="DISCOUNTPOINTS" EntityType="Self.DISCOUNTPOINTS" store:Type="Tables" store:Schema="SBD_ST_PS5_1">
-            <DefiningQuery>SELECT 
-"DISCOUNTPOINTS"."DISCOUNT" AS "DISCOUNT", 
-"DISCOUNTPOINTS"."POINTS_MINIMUM" AS "POINTS_MINIMUM", 
-"DISCOUNTPOINTS"."POINTS_MAXIMUM" AS "POINTS_MAXIMUM"
-FROM "SBD_ST_PS5_1"."DISCOUNTPOINTS" "DISCOUNTPOINTS"</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="STOREORDERS" EntityType="Self.STOREORDERS" store:Type="Tables" store:Schema="SBD_ST_PS5_1">
-            <DefiningQuery>SELECT 
-"STOREORDERS"."NUMBER_OF_PRODUCTS" AS "NUMBER_OF_PRODUCTS", 
-"STOREORDERS"."ORDER_ID" AS "ORDER_ID", 
-"STOREORDERS"."PRODUCT_ID" AS "PRODUCT_ID"
-FROM "SBD_ST_PS5_1"."STOREORDERS" "STOREORDERS"</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="STOREORDERS" EntityType="Self.STOREORDERS" Schema="SBD_ST_PS5_1" store:Type="Tables" />
           <AssociationSet Name="FK_BRUSHES_ID" Association="Self.FK_BRUSHES_ID">
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
             <End Role="BRUSHES" EntitySet="BRUSHES" />
@@ -640,8 +616,7 @@ FROM "SBD_ST_PS5_1"."STOREORDERS" "STOREORDERS"</DefiningQuery>
             <End Role="STOREORDERS" EntitySet="STOREORDERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -868,19 +843,18 @@ FROM "SBD_ST_PS5_1"."STOREORDERS" "STOREORDERS"</DefiningQuery>
         </EntityType>
         <EntityType Name="CUSTOMERORDER">
           <Key>
-            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+            <PropertyRef Name="CUSTOMERORDERS_ID" />
           </Key>
           <Property Name="NUMBER_OF_PRODUCTS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ORDER_ID" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="INFOORDERCUSTOMER" Relationship="Self.FK_CUSTOMER_ORDERS_ORDER" FromRole="CUSTOMERORDERS" ToRole="INFOORDERCUSTOMER" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_CUSTOMER_ORDERS_PRODUCT" FromRole="CUSTOMERORDERS" ToRole="PRODUCTS" />
+          <Property Name="CUSTOMERORDERS_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="DISCOUNTPOINT">
           <Key>
             <PropertyRef Name="DISCOUNT" />
-            <PropertyRef Name="POINTS_MINIMUM" />
-            <PropertyRef Name="POINTS_MAXIMUM" />
           </Key>
           <Property Name="DISCOUNT" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="POINTS_MINIMUM" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
@@ -888,13 +862,14 @@ FROM "SBD_ST_PS5_1"."STOREORDERS" "STOREORDERS"</DefiningQuery>
         </EntityType>
         <EntityType Name="STOREORDER">
           <Key>
-            <PropertyRef Name="NUMBER_OF_PRODUCTS" />
+            <PropertyRef Name="STOREORDERS_ID" />
           </Key>
           <Property Name="NUMBER_OF_PRODUCTS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ORDER_ID" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="PRODUCT_ID" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="INFOSTOREORDER" Relationship="Self.FK_STORE_ORDERS_ORDER" FromRole="STOREORDERS" ToRole="INFOSTOREORDER" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_STORE_ORDERS_PRODUCT" FromRole="STOREORDERS" ToRole="PRODUCTS" />
+          <Property Name="STOREORDERS_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
         </EntityType>
         <Association Name="FK_BRUSHES_ID">
           <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
@@ -1509,6 +1484,7 @@ FROM "SBD_ST_PS5_1"."STOREORDERS" "STOREORDERS"</DefiningQuery>
           <EntitySetMapping Name="CUSTOMERORDERS">
             <EntityTypeMapping TypeName="Model.CUSTOMERORDER">
               <MappingFragment StoreEntitySet="CUSTOMERORDERS">
+                <ScalarProperty Name="CUSTOMERORDERS_ID" ColumnName="CUSTOMERORDERS_ID" />
                 <ScalarProperty Name="NUMBER_OF_PRODUCTS" ColumnName="NUMBER_OF_PRODUCTS" />
                 <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
                 <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
@@ -1527,6 +1503,7 @@ FROM "SBD_ST_PS5_1"."STOREORDERS" "STOREORDERS"</DefiningQuery>
           <EntitySetMapping Name="STOREORDERS">
             <EntityTypeMapping TypeName="Model.STOREORDER">
               <MappingFragment StoreEntitySet="STOREORDERS">
+                <ScalarProperty Name="STOREORDERS_ID" ColumnName="STOREORDERS_ID" />
                 <ScalarProperty Name="NUMBER_OF_PRODUCTS" ColumnName="NUMBER_OF_PRODUCTS" />
                 <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
                 <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
