@@ -135,6 +135,9 @@
     <Compile Include="NOTEBOOK.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrdersDetails.xaml.cs">
+      <DependentUpon>OrdersDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PAINT.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OrdersDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PencilDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

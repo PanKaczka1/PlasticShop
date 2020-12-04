@@ -796,6 +796,15 @@ namespace PlasticShop
         {
 
         }
+
+        private void orderBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
+            {
+                OrdersDetails orderDetails = new OrdersDetails();
+                orderDetails.Show();
+            }
+        }
     }
 }
 

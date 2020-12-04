@@ -226,7 +226,7 @@
                     <ListBox Name="ordersList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Name="orderBlock" MouseLeftButtonDown="DoubleClickOrder" Text="{Binding ORDER_DATE}">
+                                <TextBlock Name="orderBlock" MouseLeftButtonDown="orderBlock_MouseLeftButtonDown"  Text="{Binding ORDER_DATE}">
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
