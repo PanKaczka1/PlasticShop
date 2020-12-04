@@ -170,12 +170,13 @@
                     <DatePicker Name="deliverDate" Width="100" Margin="10,189,658.8,153"/>
                     <Label x:Name="labelCustomerOrder" Content="Customer" Margin="135,10,487.8,288.8"/>
                     <ComboBox x:Name="customersOrder" ItemsSource="{Binding Path=customers}" DisplayMemberPath="NAME" HorizontalAlignment="Left" Margin="135,35,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="labelDelivererOrder" Content="Deliverer" Margin="260,10,362.8,288.8"/>
+                    <Label x:Name="labelDelivererOrder" Content="Deliverer" Margin="260,10,362.8,289"/>
                     <ComboBox x:Name="deliverersOrder" ItemsSource="{Binding Path=deliverers}" DisplayMemberPath="DELIVERER_NAME" HorizontalAlignment="Left" Margin="260,35,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="labelProductsOrder" Content="Deliverer" Margin="260,10,362.8,288.8"/>
+                    <Label x:Name="labelProductsOrder" Content="Products" Margin="130,118,492.8,181"/>
                     <ComboBox x:Name="productsOrder" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="labelProductsAmount" Content="Products Amount" Margin="255,118,367.8,214"/>
                     <TextBox x:Name="productsAmount" Height="24" TextWrapping="Wrap" Margin="260,142,455.8,206"/>
+                    <Button x:Name="addNewProduct" Content="Add Product" Click="addNewProduct_Click" HorizontalAlignment="Left" Margin="318,142,0,0" VerticalAlignment="Top" Width="75"/>
                     <ListBox Name="ordersList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

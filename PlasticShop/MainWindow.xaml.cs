@@ -31,6 +31,7 @@ namespace PlasticShop
         ObservableCollection<INFOORDERCUSTOMER> customerOrders;
         ObservableCollection<INFOSTOREORDER> storeOrders;
         ObservableCollection<PRODUCT> products;
+        ObservableCollection<CUSTOMERORDER> productsInOrder;
 
         public MainWindow()
         {
@@ -43,6 +44,7 @@ namespace PlasticShop
             customerOrders = new ObservableCollection<INFOORDERCUSTOMER>();
             storeOrders = new ObservableCollection<INFOSTOREORDER>();
             products = new ObservableCollection<PRODUCT>();
+            productsInOrder = new ObservableCollection<CUSTOMERORDER>();
             using (var context = new Entities())
             {
                 foreach (var pencil in context.PENCILS)
@@ -686,8 +688,8 @@ namespace PlasticShop
         {
             var customerOrder = new INFOORDERCUSTOMER();
             var storeOrder = new INFOSTOREORDER();
-            var cOrder = new CUSTOMERORDER();
-            var sOrder = new STOREORDER();
+            var cOrderList = new List<CUSTOMERORDER>();
+            var sOrderList = new List<STOREORDER>();
             using (var context = new Entities())
             {
                 if (context.INFOORDERCUSTOMERs.Any())
@@ -695,8 +697,11 @@ namespace PlasticShop
                     decimal id = context.INFOORDERCUSTOMERs.Max(p => p.ORDER_ID);
                     customerOrder.ORDER_ID = id + 1;
                     storeOrder.ORDER_ID = id + 1;
-                    cOrder.ORDER_ID = id + 1;
-                    sOrder.ORDER_ID = id + 1;
+                }
+                foreach(var item in productsInOrder)
+                {
+                    cOrderList.Add(new CUSTOMERORDER() { NUMBER_OF_PRODUCTS = item.NUMBER_OF_PRODUCTS, PRODUCT_ID = item.PRODUCT_ID, ORDER_ID = customerOrder.ORDER_ID });
+                    sOrderList.Add(new STOREORDER() { NUMBER_OF_PRODUCTS = item.NUMBER_OF_PRODUCTS, PRODUCT_ID = item.PRODUCT_ID, ORDER_ID = customerOrder.ORDER_ID });
                 }
             }
             customerOrder.ORDER_DATE = (System.DateTime)orderDate.SelectedDate;
@@ -717,8 +722,17 @@ namespace PlasticShop
             {
                 context.INFOORDERCUSTOMERs.Add(customerOrder);
                 context.INFOSTOREORDERs.Add(storeOrder);
+                foreach(var itemC in cOrderList)
+                {
+                    context.CUSTOMERORDERS.Add(itemC);
+                }
+                foreach(var itemS in sOrderList)
+                {
+                    context.STOREORDERS.Add(itemS);
+                }
                 var item = context.INFOORDERCUSTOMERs.Find(customerOrder.ORDER_ID);
                 customerOrders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = item.ORDER_DATE, ORDER_ID = item.ORDER_ID });
+                productsInOrder.Clear();
                 context.SaveChanges();
             }
         }
@@ -742,6 +756,24 @@ namespace PlasticShop
             {
                 products.Clear();
             }
+        }
+
+        private void addNewProduct_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                productsInOrder.Add(new CUSTOMERORDER() { PRODUCT_ID = ((PRODUCT)productsOrder.SelectedItem).PRODUCT_ID, NUMBER_OF_PRODUCTS = decimal.Parse(productsAmount.Text) });
+            }
+            catch(Exception exc)
+            {
+                MessageBox.Show("Invalid data");
+            }
+            using(var context = new Entities())
+            {
+                var item = context.PRODUCTS.Find(((PRODUCT)productsOrder.SelectedItem).PRODUCT_ID);
+                MessageBox.Show("Product " + item.PRODUCT_NAME + " was added to order");
+            }
+            products.Clear();
         }
     }
 }
