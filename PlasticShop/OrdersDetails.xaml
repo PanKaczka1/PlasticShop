@@ -18,7 +18,7 @@
         <ListBox Name="productsInOrderList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Name="productsInOrderBlock" Text="{Binding ORDER_DATE}">
+                    <TextBlock Name="productsInOrderBlock" Text="{Binding PRODUCT_NAME}">
                     </TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>

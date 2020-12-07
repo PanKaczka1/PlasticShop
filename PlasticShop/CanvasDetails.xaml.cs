@@ -44,13 +44,101 @@ namespace PlasticShop
             {
                 var product = context.PRODUCTS.Find(p.PRODUCT_ID);
                 var canvas = context.CANVASES.Find(p.PRODUCT_ID);
-                product.PRODUCT_NAME = productName.Text;
-                product.PRODUCTS_IN_STOCK = int.Parse(productsInStock.Text);
-                product.DISCOUNT = int.Parse(discount.Text);
-                product.PRICE = decimal.Parse(price.Text);
-                product.PRODUCER = producer.Text;
-                canvas.CANVASE_SIZE = canvasSize.Text;
-                canvas.MATERIAL = canvasMaterial.Text;
+                if (string.IsNullOrEmpty(productName.Text))
+                {
+                    MessageBox.Show("Invalid data", "Name");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        product.PRODUCT_NAME = productName.Text;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Invalid data", "Name");
+                        return;
+                    }
+                }
+                try
+                {
+                    product.PRODUCTS_IN_STOCK = int.Parse(productsInStock.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid data", "Products in stock");
+                    return;
+                }
+                try
+                {
+                    product.DISCOUNT = int.Parse(discount.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalide data", "Discount");
+                    return;
+                }
+                try
+                {
+                    product.PRICE = decimal.Parse(price.Text);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Price");
+                    return;
+                }
+                if (string.IsNullOrEmpty(producer.Text))
+                {
+                    MessageBox.Show("Invalid data", "Producer");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        product.PRODUCER = producer.Text;
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Invalid data", "Producer");
+                        return;
+                    }
+                }
+                if (string.IsNullOrEmpty(canvasSize.Text))
+                {
+                    MessageBox.Show("Invalid data", "Canvas Size");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        canvas.CANVASE_SIZE = canvasSize.Text;
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Invalid data", "Canvas Size");
+                        return;
+                    }
+                }
+                if (string.IsNullOrEmpty(canvasMaterial.Text))
+                {
+                    MessageBox.Show("Invalid data", "Material");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        canvas.MATERIAL = canvasMaterial.Text;
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Invalid data", "Material");
+                        return;
+                    }
+                }
                 context.SaveChanges();
                 this.Close();
             }

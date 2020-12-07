@@ -27,6 +27,7 @@ namespace PlasticShop
     {
         ObservableCollection<PRODUCT> pencils;
         ObservableCollection<PRODUCT> canvases;
+        ObservableCollection<PRODUCT> crayons;
         ObservableCollection<COLOUR> colours;
         ObservableCollection<CUSTOMER> customers;
         ObservableCollection<DELIVERER> deliverers;
@@ -34,12 +35,16 @@ namespace PlasticShop
         ObservableCollection<INFOSTOREORDER> storeOrders;
         ObservableCollection<PRODUCT> products;
         ObservableCollection<CUSTOMERORDER> customerOrderProducts;
+        ObservableCollection<COLOUR> productColours;
+        ObservableCollection<PRODUCT> productsInOrder;
+        ObservableCollection<DISCOUNTPOINT> discountPointsCollection;
 
         public MainWindow()
         {
             InitializeComponent();
             pencils = new ObservableCollection<PRODUCT>();
             canvases = new ObservableCollection<PRODUCT>();
+            crayons = new ObservableCollection<PRODUCT>();
             colours = new ObservableCollection<COLOUR>();
             customers = new ObservableCollection<CUSTOMER>();
             deliverers = new ObservableCollection<DELIVERER>();
@@ -47,6 +52,9 @@ namespace PlasticShop
             storeOrders = new ObservableCollection<INFOSTOREORDER>();
             products = new ObservableCollection<PRODUCT>();
             customerOrderProducts = new ObservableCollection<CUSTOMERORDER>();
+            productColours = new ObservableCollection<COLOUR>();
+            productsInOrder = new ObservableCollection<PRODUCT>();
+            discountPointsCollection = new ObservableCollection<DISCOUNTPOINT>();
             using (var context = new Entities())
             {
                 foreach (var pencil in context.PENCILS)
@@ -54,22 +62,27 @@ namespace PlasticShop
                     var item = context.PRODUCTS.Find(pencil.PRODUCT_ID);
                     pencils.Add(new PRODUCT() { PRODUCT_NAME = item.PRODUCT_NAME, PRODUCT_ID = item.PRODUCT_ID });
                 }
-                foreach(var canvas in context.CANVASES)
+                foreach (var canvas in context.CANVASES)
                 {
                     var canvasItem = context.PRODUCTS.Find(canvas.PRODUCT_ID);
                     canvases.Add(new PRODUCT() { PRODUCT_NAME = canvasItem.PRODUCT_NAME, PRODUCT_ID = canvasItem.PRODUCT_ID });
                 }
-                foreach(var colour in context.COLOURS)
+                foreach(var crayon in context.CRAYONS)
+                {
+                    var crayonItem = context.PRODUCTS.Find(crayon.PRODUCT_ID);
+                    crayons.Add(new PRODUCT() { PRODUCT_NAME = crayonItem.PRODUCT_NAME, PRODUCT_ID = crayonItem.PRODUCT_ID });
+                }
+                foreach (var colour in context.COLOURS)
                 {
                     var colourItem = context.COLOURS.Find(colour.COLOUR_ID);
                     colours.Add(new COLOUR() { COLOUR_NAME = colourItem.COLOUR_NAME, COLOUR_ID = colourItem.COLOUR_ID });
                 }
-                foreach(var customer in context.CUSTOMERS)
+                foreach (var customer in context.CUSTOMERS)
                 {
                     var customerItem = context.CUSTOMERS.Find(customer.CUSTOMER_ID);
                     customers.Add(new CUSTOMER() { NAME = customerItem.NAME, CUSTOMER_ID = customerItem.CUSTOMER_ID });
                 }
-                foreach(var deliverer in context.DELIVERERS)
+                foreach (var deliverer in context.DELIVERERS)
                 {
                     var delivererItem = context.DELIVERERS.Find(deliverer.DELIVERER_ID);
                     deliverers.Add(new DELIVERER() { DELIVERER_NAME = delivererItem.DELIVERER_NAME, DELIVERER_ID = delivererItem.DELIVERER_ID });
@@ -79,9 +92,16 @@ namespace PlasticShop
                     var customerOrderItem = context.INFOORDERCUSTOMERs.Find(customerOrder.ORDER_ID);
                     customerOrders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = customerOrderItem.ORDER_DATE, ORDER_ID = customerOrderItem.ORDER_ID });
                 }
+                foreach (var discountPoint in context.DISCOUNTPOINTS)
+                {
+                    var discountPointItem = context.DISCOUNTPOINTS.Find(discountPoint.DISCOUNT);
+                    discountPointsCollection.Add(new DISCOUNTPOINT() { DISCOUNT = discountPointItem.DISCOUNT });
+                }
             }
+            discountPointsList.ItemsSource = discountPointsCollection;
             pencilsList.ItemsSource = pencils;
             canvasesList.ItemsSource = canvases;
+            crayonsList.ItemsSource = crayons;
             coloursList.ItemsSource = colours;
             customersList.ItemsSource = customers;
             deliverersList.ItemsSource = deliverers;
@@ -100,7 +120,8 @@ namespace PlasticShop
         {
             if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
             {
-
+                OrdersDetails orderDetails = new OrdersDetails((INFOORDERCUSTOMER)ordersList.SelectedItem);
+                orderDetails.Show();
             }
         }
 
@@ -262,14 +283,22 @@ namespace PlasticShop
                 }
 
             }
-            try
-            {
-                product.PRODUCT_NAME = canvasName.Text;
-            }
-            catch (Exception ex)
+            if(string.IsNullOrEmpty(canvasName.Text))
             {
                 MessageBox.Show("Invalid data", "Name");
                 return;
+            }
+            else
+            {
+                try
+                {
+                    product.PRODUCT_NAME = canvasName.Text;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid data", "Name");
+                    return;
+                }
             }
             try
             {
@@ -298,32 +327,56 @@ namespace PlasticShop
                 MessageBox.Show("Invalid data", "Price");
                 return;
             }
-            try
-            {
-                product.PRODUCER = producerCanvas.Text;
-            }
-            catch (Exception exc)
+            if(string.IsNullOrEmpty(producerCanvas.Text))
             {
                 MessageBox.Show("Invalid data", "Producer");
                 return;
             }
-            try
+            else
             {
-                canvas.CANVASE_SIZE = canvaseSize.Text;
+                try
+                {
+                    product.PRODUCER = producerCanvas.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Producer");
+                    return;
+                }
             }
-            catch (Exception exc)
+            if(string.IsNullOrEmpty(canvaseSize.Text))
             {
                 MessageBox.Show("Invalid data", "Canvas Size");
                 return;
             }
-            try
+            else
             {
-                canvas.MATERIAL = canvasMaterial.Text;
+                try
+                {
+                    canvas.CANVASE_SIZE = canvaseSize.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Canvas Size");
+                    return;
+                }
             }
-            catch (Exception exc)
+            if(string.IsNullOrEmpty(canvasMaterial.Text))
             {
                 MessageBox.Show("Invalid data", "Material");
                 return;
+            }
+            else
+            {
+                try
+                {
+                    canvas.MATERIAL = canvasMaterial.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Material");
+                    return;
+                }
             }
 
             using (var context = new Entities())
@@ -348,18 +401,25 @@ namespace PlasticShop
                 }
 
             }
+            if (string.IsNullOrEmpty(colourName.Text))
+            {
+                MessageBox.Show("Invalid data", "Colour Name");
+            }
+            else
+            {
+                try
+                {
+                    colour.COLOUR_NAME = colourName.Text;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid data", "Colour Name");
+                    return;
+                }
+            }
             try
             {
-                colour.COLOUR_NAME = colourName.Text;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Invalid data", "Name");
-                return;
-            }
-            /*try
-            {
-                colour.RED_VALUE = int.Parse(redValue.Text);
+                colour.RED_VALUE = decimal.Parse(redValue.Value.ToString());
             }
             catch (Exception ex)
             {
@@ -368,7 +428,7 @@ namespace PlasticShop
             }
             try
             {
-                colour.GREEN_VALUE = int.Parse(greenValue.Text);
+                colour.GREEN_VALUE = decimal.Parse(greenValue.Value.ToString());
             }
             catch (Exception ex)
             {
@@ -377,13 +437,13 @@ namespace PlasticShop
             }
             try
             {
-                colour.BLUE_VALUE = int.Parse(blueValue.Text);
+                colour.BLUE_VALUE = decimal.Parse(blueValue.Value.ToString());
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Invalid data", "Blue Value");
                 return;
-            }*/
+            }
 
             using (var context = new Entities())
             {
@@ -409,14 +469,22 @@ namespace PlasticShop
                 }
 
             }
-            try
-            {
-                product.PRODUCT_NAME = productName.Text;
-            }
-            catch (Exception ex)
+            if (string.IsNullOrEmpty(productName.Text))
             {
                 MessageBox.Show("Invalid data", "Name");
                 return;
+            }
+            else
+            {
+                try
+                {
+                    product.PRODUCT_NAME = productName.Text;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid data", "Name");
+                    return;
+                }
             }
             try
             {
@@ -445,23 +513,39 @@ namespace PlasticShop
                 MessageBox.Show("Invalid data", "Price");
                 return;
             }
-            try
-            {
-                product.PRODUCER = producer.Text;
-            }
-            catch (Exception exc)
+            if (string.IsNullOrEmpty(producer.Text))
             {
                 MessageBox.Show("Invalid data", "Producer");
                 return;
             }
-            try
+            else
             {
-                pencil.GRAPHITE_GRADE = graphiteGrade.Text;
+                try
+                {
+                    product.PRODUCER = producer.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Producer");
+                    return;
+                }
             }
-            catch (Exception exc)
+            if (graphiteGrade.Text.Length > 4 || string.IsNullOrEmpty(graphiteGrade.Text))
             {
                 MessageBox.Show("Invalid data", "Graphite grade");
                 return;
+            }
+            else
+            {
+                try
+                {
+                    pencil.GRAPHITE_GRADE = graphiteGrade.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Graphite grade");
+                    return;
+                }
             }
 
 
@@ -474,7 +558,7 @@ namespace PlasticShop
                 pencils.Add(new PRODUCT() { PRODUCT_NAME = item.PRODUCT_NAME, PRODUCT_ID = item.PRODUCT_ID });
                 context.SaveChanges();
             }
-         }
+        }
         private void AddCustomerClick(object sender, RoutedEventArgs e)
         {
 
@@ -695,15 +779,15 @@ namespace PlasticShop
                     id = context.INFOORDERCUSTOMERs.Max(p => p.ORDER_ID);
                     customerOrder.ORDER_ID = id + 1;
                 }
+                counter = 1;
                 foreach (var itemProduct in customerOrderProducts)
                 {
-                    counter = 1;
                     if (context.CUSTOMERORDERS.Any())
                     {
                         id = context.CUSTOMERORDERS.Max(p => p.CUSTOMERORDERS_ID);
                         id = id + counter;
                         counter++;
-                        cOrder.Add( new CUSTOMERORDER() { PRODUCT_ID = itemProduct.PRODUCT_ID, NUMBER_OF_PRODUCTS = itemProduct.NUMBER_OF_PRODUCTS, ORDER_ID = customerOrder.ORDER_ID, CUSTOMERORDERS_ID = id });
+                        cOrder.Add(new CUSTOMERORDER() { PRODUCT_ID = itemProduct.PRODUCT_ID, NUMBER_OF_PRODUCTS = itemProduct.NUMBER_OF_PRODUCTS, ORDER_ID = customerOrder.ORDER_ID, CUSTOMERORDERS_ID = id });
                     }
                     else
                     {
@@ -716,60 +800,187 @@ namespace PlasticShop
             {
                 customerOrder.SUMMARY_DISCOUNT = decimal.Parse(summaryDiscount.Text);
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show("Invalid data", "Summary Discount");
             }
+            customerOrder.ORDER_DATE = System.DateTime.Now;
             using (var context = new Entities())
             {
-                foreach(var itemProduct in cOrder)
+                foreach (var itemProduct in cOrder)
                 {
                     context.CUSTOMERORDERS.Add(itemProduct);
                 }
                 context.INFOORDERCUSTOMERs.Add(customerOrder);
                 var item = context.INFOORDERCUSTOMERs.Find(customerOrder.ORDER_ID);
                 customerOrders.Add(new INFOORDERCUSTOMER() { ORDER_DATE = item.ORDER_DATE, ORDER_ID = item.ORDER_ID });
+                productsInOrder.Clear();
                 context.SaveChanges();
-            }
-        }
-
-        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(OrdersTab.IsSelected)
-            {
-                customersOrder.ItemsSource = customers;
-                using(var context = new Entities())
-                {
-                    foreach(var item in context.PRODUCTS)
-                    {
-                        products.Add(new PRODUCT() { PRODUCT_ID = item.PRODUCT_ID, PRODUCT_NAME = item.PRODUCT_NAME });
-                    }
-                }
-                productsOrder.ItemsSource = products;
-            }
-            if(!OrdersTab.IsSelected)
-            {
-                products.Clear();
             }
         }
 
         private void addProductOrder_Click(object sender, RoutedEventArgs e)
         {
-            using(var context = new Entities())
+            using (var context = new Entities())
             {
+                var item = context.PRODUCTS.Find(((PRODUCT)productsOrder.SelectedItem).PRODUCT_ID);
+                if(item.PRODUCTS_IN_STOCK < decimal.Parse(productsAmount.Text))
+                {
+                    MessageBox.Show("Not enough products in stock");
+                    return;
+                }
+                else
+                {
+                    item.PRODUCTS_IN_STOCK = item.PRODUCTS_IN_STOCK - decimal.Parse(productsAmount.Text);
+                    context.SaveChanges();
+                }
                 customerOrderProducts.Add(new CUSTOMERORDER() { NUMBER_OF_PRODUCTS = decimal.Parse(productsAmount.Text), PRODUCT_ID = ((PRODUCT)productsOrder.SelectedItem).PRODUCT_ID });
                 MessageBox.Show("Product " + ((PRODUCT)productsOrder.SelectedItem).PRODUCT_NAME + " was added to order");
+                productsInOrder.Add(new PRODUCT() { PRODUCT_NAME = ((PRODUCT)productsOrder.SelectedItem).PRODUCT_NAME });
+                productsOrderList.ItemsSource = productsInOrder;
             }
         }
 
         private void deleteCrayon_Click(object sender, RoutedEventArgs e)
         {
-
+            using (var context = new Entities())
+            {
+                foreach (PRODUCT crayon in crayons)
+                {
+                    if (crayon == (PRODUCT)crayonsList.SelectedItem)
+                    {
+                        var item = context.CRAYONS.Find(crayon.PRODUCT_ID);
+                        context.CRAYONS.Attach(item);
+                        context.CRAYONS.Remove(item);
+                        context.PRODUCTS.Attach(crayon);
+                        context.PRODUCTS.Remove(crayon);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            crayons.Remove((PRODUCT)crayonsList.SelectedItem);
         }
 
         private void addCrayon_Click(object sender, RoutedEventArgs e)
         {
+            var product = new PRODUCT();
+            var crayon = new CRAYON();
+            using (var context = new Entities())
+            {
+                if (context.PRODUCTS.Any())
+                {
+                    decimal id = context.PRODUCTS.Max(p => p.PRODUCT_ID);
+                    product.PRODUCT_ID = id + 1;
+                    crayon.PRODUCT_ID = id + 1;
+                }
 
+            }
+            if (string.IsNullOrEmpty(CrayonName.Text))
+            {
+                MessageBox.Show("Invalid data", "Name");
+                return;
+            }
+            else
+            {
+                try
+                {
+                    product.PRODUCT_NAME = CrayonName.Text;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid data", "Name");
+                    return;
+                }
+            }
+            try
+            {
+                product.PRODUCTS_IN_STOCK = int.Parse(CrayonsInStock.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid data", "Products in stock");
+                return;
+            }
+            try
+            {
+                product.DISCOUNT = int.Parse(discountCrayon.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalide data", "Discount");
+                return;
+            }
+            try
+            {
+                product.PRICE = decimal.Parse(priceCrayon.Text);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Invalid data", "Price");
+                return;
+            }
+            if (string.IsNullOrEmpty(producerCrayon.Text))
+            {
+                MessageBox.Show("Invalid data", "Producer");
+                return;
+            }
+            else
+            {
+                try
+                {
+                    product.PRODUCER = producerCrayon.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Producer");
+                    return;
+                }
+            }
+            if (string.IsNullOrEmpty(typeCrayon.Text))
+            {
+                MessageBox.Show("Invalid data", "Crayon Type");
+                return;
+            }
+            else
+            {
+                try
+                {
+                    crayon.CRAYON_TYPE = typeCrayon.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Crayon Type");
+                    return;
+                }
+            }
+            if (string.IsNullOrEmpty(shapeCrayon.Text))
+            {
+                MessageBox.Show("Invalid data", "Crayon Shape");
+                return;
+            }
+            else
+            {
+                try
+                {
+                    crayon.SHAPE = shapeCrayon.Text;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Crayon Shape");
+                    return;
+                }
+            }
+
+
+
+            using (var context = new Entities())
+            {
+                context.PRODUCTS.Add(product);
+                context.CRAYONS.Add(crayon);
+                var item = context.PRODUCTS.Find(crayon.PRODUCT_ID);
+                crayons.Add(new PRODUCT() { PRODUCT_NAME = item.PRODUCT_NAME, PRODUCT_ID = item.PRODUCT_ID });
+                context.SaveChanges();
+            }
         }
 
         private void deleteDeliver_Click(object sender, RoutedEventArgs e)
@@ -794,16 +1005,83 @@ namespace PlasticShop
 
         private void addDiscountPoint_Click(object sender, RoutedEventArgs e)
         {
+            var discountPoint = new DISCOUNTPOINT();
 
+            try
+            {
+                discountPoint.DISCOUNT = int.Parse(discountPoints.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalide data", "Discount");
+                return;
+            }
+            try
+            {
+                discountPoint.POINTS_MINIMUM = int.Parse(pointsMin.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalide data", "Discount");
+                return;
+            }
+            try
+            {
+                discountPoint.POINTS_MAXIMUM = int.Parse(pointsMax.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalide data", "Discount");
+                return;
+            }
+
+
+
+            using (var context = new Entities())
+            {
+                context.DISCOUNTPOINTS.Add(discountPoint);
+                var item = context.DISCOUNTPOINTS.Find(discountPoint.DISCOUNT);
+                discountPointsCollection.Add(new DISCOUNTPOINT() { DISCOUNT = item.DISCOUNT});
+                context.SaveChanges();
+            }
         }
 
         private void orderBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
             {
-                OrdersDetails orderDetails = new OrdersDetails();
+                OrdersDetails orderDetails = new OrdersDetails((INFOORDERCUSTOMER)ordersList.SelectedItem);
                 orderDetails.Show();
             }
+        }
+
+        private void ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            byte rr = (byte)redValue.Value;
+            byte gg = (byte)greenValue.Value;
+            byte bb = (byte)blueValue.Value;
+            Color cc = Color.FromRgb(rr, gg, bb);
+            SolidColorBrush colorBrush = new SolidColorBrush(cc);
+            borderColour.Background = colorBrush;
+        }
+
+        private void productsOrder_DropDownOpened(object sender, EventArgs e)
+        {
+            products.Clear();
+            customersOrder.ItemsSource = customers;
+            using (var context = new Entities())
+            {
+                foreach (var item in context.PRODUCTS)
+                {
+                    products.Add(new PRODUCT() { PRODUCT_ID = item.PRODUCT_ID, PRODUCT_NAME = item.PRODUCT_NAME });
+                }
+            }
+            productsOrder.ItemsSource = products;
+        }
+
+        private void colour_DropDownOpened(object sender, EventArgs e)
+        {
+            colourCrayon.ItemsSource = colours;
         }
     }
 }

@@ -19,9 +19,27 @@ namespace PlasticShop
     /// </summary>
     public partial class OrdersDetails : Window
     {
-        public OrdersDetails()
+        private INFOORDERCUSTOMER orderInfo;
+        private List<PRODUCT> products;
+        public OrdersDetails(INFOORDERCUSTOMER order)
         {
             InitializeComponent();
+            products = new List<PRODUCT>();
+            using (var context = new Entities())
+            {
+                orderInfo = context.INFOORDERCUSTOMERs.Find(order.ORDER_ID);
+                orderDate.Text = orderInfo.ORDER_DATE.ToString();
+                summaryDiscount.Text = orderInfo.SUMMARY_DISCOUNT.ToString();
+                foreach(var item in context.CUSTOMERORDERS)
+                {
+                    if(orderInfo.ORDER_ID == item.ORDER_ID)
+                    {
+                        var product = context.PRODUCTS.Find(item.PRODUCT_ID);
+                        products.Add(new PRODUCT() { PRODUCT_ID = product.PRODUCT_ID, PRODUCT_NAME = product.PRODUCT_NAME });
+                    }
+                }
+                productsInOrderList.ItemsSource = products;
+            }
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
@@ -31,7 +49,12 @@ namespace PlasticShop
 
         private void orderDone_Click(object sender, RoutedEventArgs e)
         {
-
+            shippingDate.SelectedDate = System.DateTime.Now;
+            using(var context = new Entities())
+            {
+                orderInfo.SHIPPING_DATE = System.DateTime.Now;
+                context.SaveChanges();
+            }
         }
     }
 }

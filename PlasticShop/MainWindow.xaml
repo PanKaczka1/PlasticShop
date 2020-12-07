@@ -8,7 +8,7 @@
         Title="Plastic Shop" Height="450" Width="800">
     <Grid>
 
-        <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged"  HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="774">
+        <TabControl x:Name="tabControl"  HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="774">
             <TabItem Header="Products">
                 <Grid Margin="0,0,0,0">
                     <TabControl x:Name="tabControl1" Margin="10,10,9.8,10">
@@ -30,7 +30,7 @@
                                 <TextBox x:Name="canvaseSize" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                 <Label x:Name="labelCanvasMaterial" Content="Material" Margin="135,63,488.2,236"/>
                                 <TextBox x:Name="canvasMaterial" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                <ListBox Name="canvasesList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                <ListBox Name="canvasesList" HorizontalAlignment="Left" Height="304" Margin="498,10,0,0" VerticalAlignment="Top" Width="235">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Name="canvasBlock" MouseLeftButtonDown="DoubleClickCanvas" Text="{Binding PRODUCT_NAME}">
@@ -59,7 +59,7 @@
                                 <Label x:Name="labelShapeCrayon" Content="Crayon Shape" Margin="135,63,488.2,236"/>
                                 <TextBox x:Name="shapeCrayon" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                 <Label x:Name="labelColourCrayon" Content="Colour" Margin="135,116,488.2,183"/>
-                                <ComboBox x:Name="colourCrayon" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
+                                <ComboBox x:Name="colourCrayon" DropDownOpened="colour_DropDownOpened" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
                                 <ListBox Name="crayonsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
@@ -126,14 +126,18 @@
             </TabItem>
             <TabItem Header="Colours">
                 <Grid>
-                    <Button x:Name="deleteColour" Content="Delete" Click="DeleteColourClick" HorizontalAlignment="Left" Margin="418,343,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="145*"/>
+                        <ColumnDefinition Width="624*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="deleteColour" Content="Delete" Click="DeleteColourClick" HorizontalAlignment="Left" Margin="272.9,343,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
                     <Button x:Name="addColour" Click="AddColourClick" Content="Add" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Label x:Name="labelColourName" Content="Colour Name" Margin="10,10,612.8,314"/>
+                    <Label x:Name="labelColourName" Content="Colour Name" Margin="10,10,612.8,314" Grid.ColumnSpan="2"/>
                     <TextBox x:Name="colourName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="labelredValue" Content="Red Value" Margin="10,63,612.8,261"/>
-                    <Label x:Name="labelGreenValue" Content="Green Value" Margin="10,116,612.8,203"/>
-                    <Label x:Name="labelBlueValue" Content="Blue Value" Margin="10,169,613.2,130"/>
-                    <ListBox Name="coloursList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                    <Label x:Name="labelredValue" Content="Red Value" Margin="10,63,612.8,261" Grid.ColumnSpan="2"/>
+                    <Label x:Name="labelGreenValue" Content="Green Value" Margin="10,116,612.8,203" Grid.ColumnSpan="2"/>
+                    <Label x:Name="labelBlueValue" Content="Blue Value" Margin="10,169,612.8,130" Grid.ColumnSpan="2"/>
+                    <ListBox Name="coloursList" HorizontalAlignment="Left" Height="400" Margin="352.9,10,-15.2,-38" VerticalAlignment="Top" Width="286" Grid.Column="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Name="colourBlock" MouseLeftButtonDown="DoubleClickColour" Text="{Binding COLOUR_NAME}">
@@ -141,10 +145,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Slider x:Name="redValue" Maximum="255" Minimum="0" TickFrequency="1" AutoToolTipPlacement="BottomRight"  AutoToolTipPrecision="1"  HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Height="23" Width="118"/>
-                    <Slider x:Name="greenValue" Maximum="255" Minimum="0" TickFrequency="1"   HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top" Height="23" Width="118"/>
-                    <Slider x:Name="blueValue" Maximum="255" Minimum="0" TickFrequency="1"   HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Height="23" Width="118"/>
-                    <Border BorderBrush="Black" Background="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="393,35,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Slider x:Name="redValue" Maximum="255" Minimum="0" ValueChanged="ValueChanged" TickFrequency="1" IsSnapToTickEnabled="True" AutoToolTipPlacement="BottomRight"  AutoToolTipPrecision="1"  HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Height="23" Width="118"/>
+                    <Slider x:Name="greenValue" Maximum="255" Minimum="0" ValueChanged="ValueChanged" TickFrequency="1" IsSnapToTickEnabled="True"   HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top" Height="23" Width="118"/>
+                    <Slider x:Name="blueValue" Maximum="255" Minimum="0" ValueChanged="ValueChanged" TickFrequency="1" IsSnapToTickEnabled="True"  HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Height="23" Width="118"/>
+                    <Border x:Name="borderColour" BorderBrush="Black" Background="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="247.9,35,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Customers">
@@ -218,7 +222,7 @@
                     <Label x:Name="labelCustomerOrder" Content="Customer" Margin="10,10,612.8,289"/>
                     <ComboBox x:Name="customersOrder" ItemsSource="{Binding Path=customers}" DisplayMemberPath="NAME" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="labelProductsOrder" Content="Products" Margin="135,10,487.8,289"/>
-                    <ComboBox x:Name="productsOrder" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="productsOrder" DropDownOpened="productsOrder_DropDownOpened" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="labelProductsAmount" Content="Products Amount" Margin="260,10,362.8,322"/>
                     <TextBox x:Name="productsAmount" Height="24" TextWrapping="Wrap" Margin="260,33,455.8,315"/>
                     <Button x:Name="addProductOrder" Click="addProductOrder_Click" Content="Add Product" HorizontalAlignment="Left" Margin="318,33,0,0" VerticalAlignment="Top" Width="75"/>
@@ -235,7 +239,7 @@
                     <ListBox Name="productsOrderList" HorizontalAlignment="Left" Height="202" Margin="260,62,0,0" VerticalAlignment="Top" Width="180">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Name="productOrderBlock" MouseLeftButtonDown="orderBlock_MouseLeftButtonDown"  Text="{Binding ORDER_DATE}">
+                                <TextBlock Name="productOrderBlock" MouseLeftButtonDown="orderBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

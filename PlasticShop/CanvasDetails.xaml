@@ -20,7 +20,7 @@
         <TextBox x:Name="price" HorizontalAlignment="Left" Height="23" Margin="10,272,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <Label x:Name="labelCanvasSize" Content="Canvas Size" Margin="10,300,663.6,90"/>
         <TextBox x:Name="canvasSize" HorizontalAlignment="Left" Height="23" Margin="10,330,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="labelCanvasMaterial" Content="Material" Margin="10,358,663.6,32"/>
-        <TextBox x:Name="canvasMaterial" HorizontalAlignment="Left" Height="23" Margin="10,330,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelCanvasMaterial" Content="Material" Margin="135,10,538.6,380"/>
+        <TextBox x:Name="canvasMaterial" HorizontalAlignment="Left" Height="23" Margin="135,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
