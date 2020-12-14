@@ -23,6 +23,6 @@
         <Label x:Name="labelShapeCrayon" Content="Crayon Shape" Margin="135,63,488.2,236"/>
         <TextBox x:Name="shapeCrayon" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="labelColourCrayon" Content="Colour" Margin="135,116,488.2,183"/>
-        <ComboBox x:Name="colourCrayon" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="colourCrayon" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,142,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

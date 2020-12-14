@@ -1,0 +1,26 @@
+﻿<Window x:Class="PlasticShop.MarkerDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlasticShop"
+        mc:Ignorable="d"
+        Title="MarkerDetails" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="edit" Click="edit_Click"  Content="Edit" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="labelMarkerName" Content="Product Name" Margin="10,10,613.2,289"/>
+        <TextBox x:Name="MarkerName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelMarkerInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+        <TextBox x:Name="MarkerInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelDiscountMarker" Content="Discount" Margin="10,116,613.2,183"/>
+        <TextBox x:Name="discountMarker" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelProducerMarker" Content="Producer" Margin="10,169,613.2,130"/>
+        <TextBox x:Name="producerMarker" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelPriceMarker" Content="Price" Margin="10,223,613.2,76"/>
+        <TextBox x:Name="priceMarker" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelTypeMarker" Content="Marker Type" Margin="135,10,488.2,289"/>
+        <TextBox x:Name="typeMarker" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelColourMarker" Content="Colour" Margin="135,63,488.2,236"/>
+        <ComboBox x:Name="colourMarker" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,88,0,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

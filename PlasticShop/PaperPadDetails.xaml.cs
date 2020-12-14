@@ -15,36 +15,29 @@ using System.Windows.Shapes;
 namespace PlasticShop
 {
     /// <summary>
-    /// Interaction logic for CrayonDetails.xaml
+    /// Interaction logic for PaperPadDetails.xaml
     /// </summary>
-    public partial class CrayonDetails : Window
+    public partial class PaperPadDetails : Window
     {
         private PRODUCT p;
-        private List<COLOUR> colours;
-        public CrayonDetails(PRODUCT product)
+        public PaperPadDetails(PRODUCT product)
         {
             InitializeComponent();
             using (var context = new Entities())
             {
-                colours = new List<COLOUR>();
-                foreach(COLOUR colour in context.COLOURS)
-                {
-                    colours.Add(new COLOUR() { COLOUR_ID = colour.COLOUR_ID, COLOUR_NAME = colour.COLOUR_NAME });
-                }
-                colourCrayon.ItemsSource = colours;
                 p = context.PRODUCTS.Find(product.PRODUCT_ID);
-                var crayon = new CRAYON();
-                crayon = context.CRAYONS.Find(product.PRODUCT_ID);
-                CrayonName.Text = p.PRODUCT_NAME;
-                CrayonsInStock.Text = p.PRODUCTS_IN_STOCK.ToString();
-                discountCrayon.Text = p.DISCOUNT.ToString();
-                priceCrayon.Text = p.PRICE.ToString();
-                producerCrayon.Text = p.PRODUCER;
-                typeCrayon.Text = crayon.CRAYON_TYPE;
-                shapeCrayon.Text = crayon.SHAPE;
-                var c = context.COLOURS.Find(crayon.COLOUR_ID);
-                colourCrayon.SelectedItem = c;
+                var paperPad = new PAPERPAD();
+                paperPad = context.PAPERPADS.Find(product.PRODUCT_ID);
+                PaperPadName.Text = p.PRODUCT_NAME;
+                PaperPadInStock.Text = p.PRODUCTS_IN_STOCK.ToString();
+                discountPaperPad.Text = p.DISCOUNT.ToString();
+                pricePaperPad.Text = p.PRICE.ToString();
+                producerPaperPad.Text = p.PRODUCER;
+                paperPadSize.Text = paperPad.PAPER_PAD_SIZE;
+                paperPadPages.Text = paperPad.PAGES_NUMBER.ToString();
+                grammagePaperPad.Text = paperPad.GRAMMAGE.ToString();
             }
+
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
@@ -52,8 +45,8 @@ namespace PlasticShop
             using (var context = new Entities())
             {
                 var product = context.PRODUCTS.Find(p.PRODUCT_ID);
-                var crayon = context.CRAYONS.Find(p.PRODUCT_ID);
-                if (string.IsNullOrEmpty(CrayonName.Text))
+                var paperPad = context.PAPERPADS.Find(p.PRODUCT_ID);
+                if (string.IsNullOrEmpty(PaperPadName.Text))
                 {
                     MessageBox.Show("Invalid data", "Name");
                     return;
@@ -62,7 +55,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        product.PRODUCT_NAME = CrayonName.Text;
+                        product.PRODUCT_NAME = PaperPadName.Text;
                     }
                     catch (Exception ex)
                     {
@@ -72,7 +65,7 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.PRODUCTS_IN_STOCK = int.Parse(CrayonsInStock.Text);
+                    product.PRODUCTS_IN_STOCK = int.Parse(PaperPadInStock.Text);
                 }
                 catch (Exception ex)
                 {
@@ -81,7 +74,7 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.DISCOUNT = int.Parse(discountCrayon.Text);
+                    product.DISCOUNT = int.Parse(discountPaperPad.Text);
                 }
                 catch (Exception ex)
                 {
@@ -90,14 +83,14 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.PRICE = decimal.Parse(priceCrayon.Text);
+                    product.PRICE = decimal.Parse(pricePaperPad.Text);
                 }
                 catch (Exception exc)
                 {
                     MessageBox.Show("Invalid data", "Price");
                     return;
                 }
-                if (string.IsNullOrEmpty(producerCrayon.Text))
+                if (string.IsNullOrEmpty(producerPaperPad.Text))
                 {
                     MessageBox.Show("Invalid data", "Producer");
                     return;
@@ -106,7 +99,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        product.PRODUCER = producerCrayon.Text;
+                        product.PRODUCER = producerPaperPad.Text;
                     }
                     catch (Exception exc)
                     {
@@ -114,7 +107,7 @@ namespace PlasticShop
                         return;
                     }
                 }
-                if (string.IsNullOrEmpty(typeCrayon.Text))
+                if (string.IsNullOrEmpty(paperPadSize.Text))
                 {
                     MessageBox.Show("Invalid data", "Crayon Type");
                     return;
@@ -123,7 +116,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        crayon.CRAYON_TYPE = typeCrayon.Text;
+                        paperPad.PAPER_PAD_SIZE = paperPadSize.Text;
                     }
                     catch (Exception exc)
                     {
@@ -131,25 +124,24 @@ namespace PlasticShop
                         return;
                     }
                 }
-                if (string.IsNullOrEmpty(shapeCrayon.Text))
+                try
                 {
-                    MessageBox.Show("Invalid data", "Crayon Shape");
+                    paperPad.PAGES_NUMBER = decimal.Parse(paperPadPages.Text);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Price");
                     return;
                 }
-                else
+                try
                 {
-                    try
-                    {
-                        crayon.SHAPE = shapeCrayon.Text;
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show("Invalid data", "Crayon Shape");
-                        return;
-                    }
+                    paperPad.GRAMMAGE = decimal.Parse(grammagePaperPad.Text);
                 }
-
-                crayon.COLOUR_ID = ((COLOUR)colourCrayon.SelectedItem).COLOUR_ID;
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Price");
+                    return;
+                }
                 context.SaveChanges();
                 this.Close();
             }

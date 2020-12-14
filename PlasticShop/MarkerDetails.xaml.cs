@@ -15,35 +15,34 @@ using System.Windows.Shapes;
 namespace PlasticShop
 {
     /// <summary>
-    /// Interaction logic for CrayonDetails.xaml
+    /// Interaction logic for MarkerDetails.xaml
     /// </summary>
-    public partial class CrayonDetails : Window
+    public partial class MarkerDetails : Window
     {
         private PRODUCT p;
         private List<COLOUR> colours;
-        public CrayonDetails(PRODUCT product)
+        public MarkerDetails(PRODUCT product)
         {
             InitializeComponent();
             using (var context = new Entities())
             {
                 colours = new List<COLOUR>();
-                foreach(COLOUR colour in context.COLOURS)
+                foreach (COLOUR colour in context.COLOURS)
                 {
                     colours.Add(new COLOUR() { COLOUR_ID = colour.COLOUR_ID, COLOUR_NAME = colour.COLOUR_NAME });
                 }
-                colourCrayon.ItemsSource = colours;
+                colourMarker.ItemsSource = colours;
                 p = context.PRODUCTS.Find(product.PRODUCT_ID);
-                var crayon = new CRAYON();
-                crayon = context.CRAYONS.Find(product.PRODUCT_ID);
-                CrayonName.Text = p.PRODUCT_NAME;
-                CrayonsInStock.Text = p.PRODUCTS_IN_STOCK.ToString();
-                discountCrayon.Text = p.DISCOUNT.ToString();
-                priceCrayon.Text = p.PRICE.ToString();
-                producerCrayon.Text = p.PRODUCER;
-                typeCrayon.Text = crayon.CRAYON_TYPE;
-                shapeCrayon.Text = crayon.SHAPE;
-                var c = context.COLOURS.Find(crayon.COLOUR_ID);
-                colourCrayon.SelectedItem = c;
+                var marker = new MARKER();
+                marker = context.MARKERS.Find(product.PRODUCT_ID);
+                MarkerName.Text = p.PRODUCT_NAME;
+                MarkerInStock.Text = p.PRODUCTS_IN_STOCK.ToString();
+                discountMarker.Text = p.DISCOUNT.ToString();
+                priceMarker.Text = p.PRICE.ToString();
+                producerMarker.Text = p.PRODUCER;
+                typeMarker.Text = marker.MARKER_TYPE;
+                var c = context.COLOURS.Find(marker.COLOUR_ID);
+                colourMarker.SelectedItem = c;
             }
         }
 
@@ -52,8 +51,9 @@ namespace PlasticShop
             using (var context = new Entities())
             {
                 var product = context.PRODUCTS.Find(p.PRODUCT_ID);
-                var crayon = context.CRAYONS.Find(p.PRODUCT_ID);
-                if (string.IsNullOrEmpty(CrayonName.Text))
+                var marker = context.MARKERS.Find(p.PRODUCT_ID);
+
+                if (string.IsNullOrEmpty(MarkerName.Text))
                 {
                     MessageBox.Show("Invalid data", "Name");
                     return;
@@ -62,7 +62,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        product.PRODUCT_NAME = CrayonName.Text;
+                        product.PRODUCT_NAME = MarkerName.Text;
                     }
                     catch (Exception ex)
                     {
@@ -72,7 +72,7 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.PRODUCTS_IN_STOCK = int.Parse(CrayonsInStock.Text);
+                    product.PRODUCTS_IN_STOCK = int.Parse(MarkerInStock.Text);
                 }
                 catch (Exception ex)
                 {
@@ -81,7 +81,7 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.DISCOUNT = int.Parse(discountCrayon.Text);
+                    product.DISCOUNT = int.Parse(discountMarker.Text);
                 }
                 catch (Exception ex)
                 {
@@ -90,14 +90,14 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.PRICE = decimal.Parse(priceCrayon.Text);
+                    product.PRICE = decimal.Parse(priceMarker.Text);
                 }
                 catch (Exception exc)
                 {
                     MessageBox.Show("Invalid data", "Price");
                     return;
                 }
-                if (string.IsNullOrEmpty(producerCrayon.Text))
+                if (string.IsNullOrEmpty(producerMarker.Text))
                 {
                     MessageBox.Show("Invalid data", "Producer");
                     return;
@@ -106,7 +106,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        product.PRODUCER = producerCrayon.Text;
+                        product.PRODUCER = producerMarker.Text;
                     }
                     catch (Exception exc)
                     {
@@ -114,7 +114,7 @@ namespace PlasticShop
                         return;
                     }
                 }
-                if (string.IsNullOrEmpty(typeCrayon.Text))
+                if (string.IsNullOrEmpty(typeMarker.Text))
                 {
                     MessageBox.Show("Invalid data", "Crayon Type");
                     return;
@@ -123,7 +123,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        crayon.CRAYON_TYPE = typeCrayon.Text;
+                        marker.MARKER_TYPE = typeMarker.Text;
                     }
                     catch (Exception exc)
                     {
@@ -131,25 +131,8 @@ namespace PlasticShop
                         return;
                     }
                 }
-                if (string.IsNullOrEmpty(shapeCrayon.Text))
-                {
-                    MessageBox.Show("Invalid data", "Crayon Shape");
-                    return;
-                }
-                else
-                {
-                    try
-                    {
-                        crayon.SHAPE = shapeCrayon.Text;
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show("Invalid data", "Crayon Shape");
-                        return;
-                    }
-                }
 
-                crayon.COLOUR_ID = ((COLOUR)colourCrayon.SelectedItem).COLOUR_ID;
+                marker.COLOUR_ID = ((COLOUR)colourMarker.SelectedItem).COLOUR_ID;
                 context.SaveChanges();
                 this.Close();
             }

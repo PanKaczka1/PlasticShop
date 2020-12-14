@@ -15,36 +15,31 @@ using System.Windows.Shapes;
 namespace PlasticShop
 {
     /// <summary>
-    /// Interaction logic for CrayonDetails.xaml
+    /// Interaction logic for NotebookDetails.xaml
     /// </summary>
-    public partial class CrayonDetails : Window
+    public partial class NotebookDetails : Window
     {
         private PRODUCT p;
-        private List<COLOUR> colours;
-        public CrayonDetails(PRODUCT product)
+        public NotebookDetails(PRODUCT product)
         {
             InitializeComponent();
             using (var context = new Entities())
             {
-                colours = new List<COLOUR>();
-                foreach(COLOUR colour in context.COLOURS)
-                {
-                    colours.Add(new COLOUR() { COLOUR_ID = colour.COLOUR_ID, COLOUR_NAME = colour.COLOUR_NAME });
-                }
-                colourCrayon.ItemsSource = colours;
                 p = context.PRODUCTS.Find(product.PRODUCT_ID);
-                var crayon = new CRAYON();
-                crayon = context.CRAYONS.Find(product.PRODUCT_ID);
-                CrayonName.Text = p.PRODUCT_NAME;
-                CrayonsInStock.Text = p.PRODUCTS_IN_STOCK.ToString();
-                discountCrayon.Text = p.DISCOUNT.ToString();
-                priceCrayon.Text = p.PRICE.ToString();
-                producerCrayon.Text = p.PRODUCER;
-                typeCrayon.Text = crayon.CRAYON_TYPE;
-                shapeCrayon.Text = crayon.SHAPE;
-                var c = context.COLOURS.Find(crayon.COLOUR_ID);
-                colourCrayon.SelectedItem = c;
+                var notebook = new NOTEBOOK();
+                notebook = context.NOTEBOOKS.Find(product.PRODUCT_ID);
+                NotebookName.Text = p.PRODUCT_NAME;
+                NotebookInStock.Text = p.PRODUCTS_IN_STOCK.ToString();
+                discountNotebook.Text = p.DISCOUNT.ToString();
+                priceNotebook.Text = p.PRICE.ToString();
+                producerNotebook.Text = p.PRODUCER;
+                paperType.Text = notebook.PAPER_TYPE;
+                notebookSize.Text = notebook.NOTEBOOK_SIZE;
+                notebookPages.Text = notebook.NOTEBOOK_PAGES.ToString();
+                grammage.Text = notebook.GRAMMAGE.ToString();
+                hardcover.Text = notebook.HARDCOVER;
             }
+
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
@@ -52,8 +47,8 @@ namespace PlasticShop
             using (var context = new Entities())
             {
                 var product = context.PRODUCTS.Find(p.PRODUCT_ID);
-                var crayon = context.CRAYONS.Find(p.PRODUCT_ID);
-                if (string.IsNullOrEmpty(CrayonName.Text))
+                var notebook = context.NOTEBOOKS.Find(p.PRODUCT_ID);
+                if (string.IsNullOrEmpty(NotebookName.Text))
                 {
                     MessageBox.Show("Invalid data", "Name");
                     return;
@@ -62,7 +57,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        product.PRODUCT_NAME = CrayonName.Text;
+                        product.PRODUCT_NAME = NotebookName.Text;
                     }
                     catch (Exception ex)
                     {
@@ -72,7 +67,7 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.PRODUCTS_IN_STOCK = int.Parse(CrayonsInStock.Text);
+                    product.PRODUCTS_IN_STOCK = int.Parse(NotebookInStock.Text);
                 }
                 catch (Exception ex)
                 {
@@ -81,7 +76,7 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.DISCOUNT = int.Parse(discountCrayon.Text);
+                    product.DISCOUNT = int.Parse(discountNotebook.Text);
                 }
                 catch (Exception ex)
                 {
@@ -90,14 +85,14 @@ namespace PlasticShop
                 }
                 try
                 {
-                    product.PRICE = decimal.Parse(priceCrayon.Text);
+                    product.PRICE = decimal.Parse(priceNotebook.Text);
                 }
                 catch (Exception exc)
                 {
                     MessageBox.Show("Invalid data", "Price");
                     return;
                 }
-                if (string.IsNullOrEmpty(producerCrayon.Text))
+                if (string.IsNullOrEmpty(producerNotebook.Text))
                 {
                     MessageBox.Show("Invalid data", "Producer");
                     return;
@@ -106,7 +101,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        product.PRODUCER = producerCrayon.Text;
+                        product.PRODUCER = producerNotebook.Text;
                     }
                     catch (Exception exc)
                     {
@@ -114,7 +109,7 @@ namespace PlasticShop
                         return;
                     }
                 }
-                if (string.IsNullOrEmpty(typeCrayon.Text))
+                if (string.IsNullOrEmpty(paperType.Text))
                 {
                     MessageBox.Show("Invalid data", "Crayon Type");
                     return;
@@ -123,7 +118,7 @@ namespace PlasticShop
                 {
                     try
                     {
-                        crayon.CRAYON_TYPE = typeCrayon.Text;
+                        notebook.PAPER_TYPE = paperType.Text;
                     }
                     catch (Exception exc)
                     {
@@ -131,25 +126,58 @@ namespace PlasticShop
                         return;
                     }
                 }
-                if (string.IsNullOrEmpty(shapeCrayon.Text))
+                if (string.IsNullOrEmpty(notebookSize.Text))
                 {
-                    MessageBox.Show("Invalid data", "Crayon Shape");
+                    MessageBox.Show("Invalid data", "Crayon Type");
                     return;
                 }
                 else
                 {
                     try
                     {
-                        crayon.SHAPE = shapeCrayon.Text;
+                        notebook.NOTEBOOK_SIZE = notebookSize.Text;
                     }
                     catch (Exception exc)
                     {
-                        MessageBox.Show("Invalid data", "Crayon Shape");
+                        MessageBox.Show("Invalid data", "Crayon Type");
                         return;
                     }
                 }
-
-                crayon.COLOUR_ID = ((COLOUR)colourCrayon.SelectedItem).COLOUR_ID;
+                if (string.IsNullOrEmpty(hardcover.Text))
+                {
+                    MessageBox.Show("Invalid data", "Crayon Type");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        notebook.HARDCOVER = hardcover.Text;
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show("Invalid data", "Crayon Type");
+                        return;
+                    }
+                }
+                try
+                {
+                    notebook.NOTEBOOK_PAGES = decimal.Parse(notebookPages.Text);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Price");
+                    return;
+                }
+                try
+                {
+                    notebook.GRAMMAGE = decimal.Parse(grammage.Text);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Invalid data", "Price");
+                    return;
+                }
                 context.SaveChanges();
                 this.Close();
             }

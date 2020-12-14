@@ -1,0 +1,32 @@
+﻿<Window x:Class="PlasticShop.NotebookDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlasticShop"
+        mc:Ignorable="d"
+        Title="NotebookDetails" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="edit" Click="edit_Click"  Content="Edit" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="labelNotebookName" Content="Product Name" Margin="10,10,613.2,289"/>
+        <TextBox x:Name="NotebookName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelNotebookInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+        <TextBox x:Name="NotebookInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelDiscountNotebook" Content="Discount" Margin="10,116,613.2,183"/>
+        <TextBox x:Name="discountNotebook" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelProducerNotebook" Content="Producer" Margin="10,169,613.2,130"/>
+        <TextBox x:Name="producerNotebook" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelPriceNotebook" Content="Price" Margin="10,223,613.2,76"/>
+        <TextBox x:Name="priceNotebook" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelPaperType" Content="Paper Type" Margin="135,10,488.2,289"/>
+        <TextBox x:Name="paperType" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelNotebookSize" Content="Size" Margin="135,63,488.2,236"/>
+        <TextBox x:Name="notebookSize" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelNotebookPages" Content="Pages" Margin="135,116,488.2,183"/>
+        <TextBox x:Name="notebookPages" HorizontalAlignment="Left" Height="23" Margin="135,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelGrammage" Content="Grammage" Margin="135,169,488.2,130"/>
+        <TextBox x:Name="grammage" HorizontalAlignment="Left" Height="23" Margin="135,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="labelHardcover" Content="Hardcover" Margin="135,222,488.2,77"/>
+        <TextBox x:Name="hardcover" HorizontalAlignment="Left" Height="23" Margin="135,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

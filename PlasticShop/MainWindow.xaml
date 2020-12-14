@@ -63,7 +63,7 @@
                                 <ListBox Name="crayonsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Name="crayonBlock" MouseLeftButtonDown="DoubleClick" Text="{Binding PRODUCT_NAME}">
+                                            <TextBlock Name="crayonBlock" MouseLeftButtonDown="crayonBlock_MouseLeftButtonDown" Text="{Binding PRODUCT_NAME}">
                                             </TextBlock>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
@@ -71,22 +71,180 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Inks">
-
+                            <Grid >
+                                <Button x:Name="deleteInk" Content="Delete" Click="deleteInk_Click"  HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addInk" Click="addInk_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelInkName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="InkName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelInkInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="InkInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountInk" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountInk" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerInk" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerInk" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPriceInk" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="priceInk" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelTypeInk" Content="Ink Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="typeInk" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelColourInk" Content="Colour" Margin="135,63,488.2,236"/>
+                                <ComboBox x:Name="colourInk" DropDownOpened="colour_DropDownOpened" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,88,0,0" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="inksList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="crayonBlock" MouseLeftButtonDown="crayonBlock_MouseLeftButtonDown_1"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Markers">
-
+                            <Grid >
+                                <Button x:Name="deleteMarker" Content="Delete" Click="deleteMarker_Click"  HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addMarker" Click="addMarker_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelMarkerName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="MarkerName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelMarkerInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="MarkerInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountMarker" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountMarker" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerMarker" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerMarker" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPriceMarker" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="priceMarker" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelTypeMarker" Content="Marker Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="typeMarker" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelColourMarker" Content="Colour" Margin="135,63,488.2,236"/>
+                                <ComboBox x:Name="colourMarker" DropDownOpened="colour_DropDownOpened" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,88,0,0" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="markersList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="markerBlock" MouseLeftButtonDown="markerBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Notebooks">
-
+                            <Grid >
+                                <Button x:Name="deleteNotebook" Content="Delete" Click="deleteNotebook_Click" HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addNotebook" Click="addNotebook_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelNotebookName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="NotebookName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelNotebookInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="NotebookInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountNotebook" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountNotebook" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerNotebook" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerNotebook" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPriceNotebook" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="priceNotebook" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPaperType" Content="Paper Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="paperType" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelNotebookSize" Content="Size" Margin="135,63,488.2,236"/>
+                                <TextBox x:Name="notebookSize" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelNotebookPages" Content="Pages" Margin="135,116,488.2,183"/>
+                                <TextBox x:Name="notebookPages" HorizontalAlignment="Left" Height="23" Margin="135,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelGrammage" Content="Grammage" Margin="135,169,488.2,130"/>
+                                <TextBox x:Name="grammage" HorizontalAlignment="Left" Height="23" Margin="135,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelHardcover" Content="Hardcover" Margin="135,222,488.2,77"/>
+                                <TextBox x:Name="hardcover" HorizontalAlignment="Left" Height="23" Margin="135,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="notebooksList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="notebookBlock" MouseLeftButtonDown="notebookBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Paints">
-
+                            <Grid >
+                                <Button x:Name="deletePaint" Content="Delete" Click="deletePaint_Click"  HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addPaint" Click="addPaint_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelPaintName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="PaintName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPaintInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="PaintInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountPaint" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountPaint" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerPaint" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerPaint" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPricePaint" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="pricePaint" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelTypePaint" Content="Paint Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="typePaint" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelColourPaint" Content="Colour" Margin="135,63,488.2,236"/>
+                                <ComboBox x:Name="colourPaint" DropDownOpened="colour_DropDownOpened" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,88,0,0" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="paintsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="paintBlock" MouseLeftButtonDown="paintBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Paper Pads">
-
+                            <Grid >
+                                <Button x:Name="deletePaperPad" Content="Delete" Click="deletePaperPad_Click"  HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addPaperPad" Click="addPaperPad_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelPaperPadName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="PaperPadName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPaperPadInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="PaperPadInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountPaperPad" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountPaperPad" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerPaperPad" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerPaperPad" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPricePaperPad" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="pricePaperPad" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPaperTypeSize" Content="Size" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="paperPadSize" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPaperPadPages" Content="Pages" Margin="135,63,488.2,236"/>
+                                <TextBox x:Name="paperPadPages" HorizontalAlignment="Left" Height="23" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelGrammagePaperPad" Content="Grammage" Margin="135,116,488.2,183"/>
+                                <TextBox x:Name="grammagePaperPad" HorizontalAlignment="Left" Height="23" Margin="135,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="paperPadsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="paperPadBlock" MouseLeftButtonDown="paperPadBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Pens">
-
+                            <Grid >
+                                <Button x:Name="deletePen" Content="Delete" Click="deletePen_Click"  HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addPen" Click="addPen_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelPenName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="PenName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPenInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="PenInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountPen" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountPen" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerPen" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerPen" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPricePen" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="pricePen" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelTypePen" Content="Pen Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="typePen" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelColourPen" Content="Colour" Margin="135,63,488.2,236"/>
+                                <ComboBox x:Name="colourPen" DropDownOpened="colour_DropDownOpened" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,88,0,0" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="pensList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="penBlock" MouseLeftButtonDown="penBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Pencils">
                             <Grid >
@@ -115,10 +273,58 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Sculpting Materials">
-
+                            <Grid >
+                                <Button x:Name="deleteSculptingMaterial" Content="Delete" Click="deleteSculptingMaterial_Click"  HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addSculptingMaterial" Click="addSculptingMaterial_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelSculptingMaterialName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="SculptingMaterialName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelSculptingMaterialInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="SculptingMaterialInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountSculptingMaterial" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountSculptingMaterial" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerSculptingMaterial" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerSculptingMaterial" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPriceSculptingMaterial" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="priceSculptingMaterial" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelTypeSculptingMaterial" Content="Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="typeSculptingMaterial" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelColourSculptingMaterial" Content="Colour" Margin="135,63,488.2,236"/>
+                                <ComboBox x:Name="colourSculptingMaterial" DropDownOpened="colour_DropDownOpened" ItemsSource="{Binding Path=colours}" DisplayMemberPath="COLOUR_NAME" HorizontalAlignment="Left" Margin="135,88,0,0" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="sculptingMaterialsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="sculptingMaterialBlock" MouseLeftButtonDown="sculptingMaterialBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Sets">
-
+                            <Grid >
+                                <Button x:Name="deleteSet" Content="Delete" Click="deleteSet_Click"  HorizontalAlignment="Left" Margin="418,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="addSet" Click="addSet_Click"  Content="Add" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label x:Name="labelSetName" Content="Product Name" Margin="10,10,613.2,289"/>
+                                <TextBox x:Name="SetName" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelSetInStock" Content="Products in stock" Margin="10,63,613.2,236"/>
+                                <TextBox x:Name="SetInStock" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelDiscountSet" Content="Discount" Margin="10,116,613.2,183"/>
+                                <TextBox x:Name="discountSet" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelProducerSet" Content="Producer" Margin="10,169,613.2,130"/>
+                                <TextBox x:Name="producerSet" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelPriceSet" Content="Price" Margin="10,223,613.2,76"/>
+                                <TextBox x:Name="priceSet" HorizontalAlignment="Left" Height="23" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <Label x:Name="labelTypeSet" Content="Set Type" Margin="135,10,488.2,289"/>
+                                <TextBox x:Name="typeSet" HorizontalAlignment="Left" Height="23" Margin="135,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                <ListBox Name="setsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="setBlock" MouseLeftButtonDown="setBlock_MouseLeftButtonDown"  Text="{Binding PRODUCT_NAME}">
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                     </TabControl>
 
@@ -253,7 +459,7 @@
                     <Label x:Name="labelDelivererDeliver" Content="Deliverer" Margin="10,10,612.8,289"/>
                     <ComboBox x:Name="delivererDeliver" ItemsSource="{Binding Path=deliverers}" DisplayMemberPath="DELIVERER_NAME" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="labelProductsDeliver" Content="Products" Margin="135,10,487.8,289"/>
-                    <ComboBox x:Name="productsDeliver" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="productsDeliver" DropDownOpened="productsOrder_DropDownOpened" ItemsSource="{Binding Path=products}" DisplayMemberPath="PRODUCT_NAME" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="labelProductsAmountDeliver" Content="Products Amount" Margin="260,10,362.8,322"/>
                     <TextBox x:Name="productsAmountDeliver" Height="24" TextWrapping="Wrap" Margin="260,33,455.8,315"/>
                     <Button x:Name="addProductDeliver" Click="addProductDeliver_Click"  Content="Add Product" HorizontalAlignment="Left" Margin="318,33,0,0" VerticalAlignment="Top" Width="75"/>
@@ -288,7 +494,7 @@
                     <ListBox Name="discountPointsList" HorizontalAlignment="Left" Height="400" Margin="498,10,0,0" VerticalAlignment="Top" Width="286">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Name="discountBlock" MouseLeftButtonDown="DoubleClickOrder" Text="{Binding ORDER_DATE}">
+                                <TextBlock Name="discountBlock" MouseLeftButtonDown="DoubleClickOrder" Text="{Binding DISCOUNT}">
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

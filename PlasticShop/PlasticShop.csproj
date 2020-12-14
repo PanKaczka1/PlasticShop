@@ -109,6 +109,9 @@
     <Compile Include="C__EFMigrationsHistory.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DeliverDetails.xaml.cs">
+      <DependentUpon>DeliverDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DELIVERER.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
@@ -132,11 +135,20 @@
     <Compile Include="INK.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="InkDetails.xaml.cs">
+      <DependentUpon>InkDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MARKER.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="MarkerDetails.xaml.cs">
+      <DependentUpon>MarkerDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NOTEBOOK.cs">
       <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotebookDetails.xaml.cs">
+      <DependentUpon>NotebookDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrdersDetails.xaml.cs">
       <DependentUpon>OrdersDetails.xaml</DependentUpon>
@@ -144,8 +156,14 @@
     <Compile Include="PAINT.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="PaintDetails.xaml.cs">
+      <DependentUpon>PaintDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PAPERPAD.cs">
       <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaperPadDetails.xaml.cs">
+      <DependentUpon>PaperPadDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="PEN.cs">
       <DependentUpon>Entities.tt</DependentUpon>
@@ -156,14 +174,23 @@
     <Compile Include="PencilDetails.xaml.cs">
       <DependentUpon>PencilDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PenDetails.xaml.cs">
+      <DependentUpon>PenDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PRODUCT.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="SCULPTINGMATERIAL.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="SculptingMaterialDetails.xaml.cs">
+      <DependentUpon>SculptingMaterialDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SET.cs">
       <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SetDetails.xaml.cs">
+      <DependentUpon>SetDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="STOREORDER.cs">
       <DependentUpon>Entities.tt</DependentUpon>
@@ -184,7 +211,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeliverDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DelivererDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InkDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,11 +245,39 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MarkerDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotebookDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OrdersDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PaintDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PaperPadDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PencilDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PenDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SculptingMaterialDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
