@@ -2392,6 +2392,15 @@ namespace PlasticShop
                 setDetails.Show();
             }
         }
+
+        private void deliverBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
+            {
+                DeliverDetails deliverDetails = new DeliverDetails((INFOSTOREORDER)deliversList.SelectedItem);
+                deliverDetails.Show();
+            }
+        }
     }
 }
 

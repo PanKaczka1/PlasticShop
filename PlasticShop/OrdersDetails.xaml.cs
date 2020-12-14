@@ -24,6 +24,7 @@ namespace PlasticShop
         public OrdersDetails(INFOORDERCUSTOMER order)
         {
             InitializeComponent();
+            orderInfo = new INFOORDERCUSTOMER();
             products = new List<PRODUCT>();
             using (var context = new Entities())
             {
